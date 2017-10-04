@@ -9,7 +9,3 @@ struct matrix {
 	struct matrix *left;
 	struct matrix *right;
 }
-
-Matrix *init_matrix(int x, int y){
-	//Matrix *m = (Matrix*) malloc(sizeof(Matrix));
-}
