@@ -1,15 +1,11 @@
-typedef struct matrix *Matrix;
+struct matrix **matrix_init();
 
-typedef struct matrix Node;
+int matrix_insert(struct matrix **, int x, int y, int v); 
 
-Matrix *init_matrix();
+struct matrix *matrix_get_by_coordinate(struct matrix **, int x, int y);
 
-int insert_on_matrix(Matrix *m, int x, int y, int v); 
+struct matrix *matrix_get_by_value(struct matrix **, int v);
 
-Node *search_by_coordinate(Matrix *m, int x, int y);
+int matrix_print_neighbors(struct matrix **);
 
-Node *search_by_value(Matrix *m);
-
-int print_neighbors(Matrix *m);
-
-void free_matrix(Matrix *m);
+void matrix_free(struct matrix **);

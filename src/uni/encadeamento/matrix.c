@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "matrix.h"
 
-struct matrix {
-	int v;
+struct matrix{
+	int value;
 	struct matrix *top;
 	struct matrix *bottom;
 	struct matrix *left;
