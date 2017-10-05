@@ -1,11 +1,13 @@
-struct matrix **matrix_init();
+typedef struct matrix Matrix;
 
-int matrix_insert(struct matrix **, int x, int y, int v); 
+Matrix **matrix_init(int x, int y);
 
-struct matrix *matrix_get_by_coordinate(struct matrix **, int x, int y);
+int matrix_insert(Matrix **m, int x, int y, int v); 
 
-struct matrix *matrix_get_by_value(struct matrix **, int v);
+Matrix *matrix_get_by_coordinate(Matrix **m, int x, int y);
 
-int matrix_print_neighbors(struct matrix **);
+Matrix *matrix_get_by_value(Matrix **m, int v);
 
-void matrix_free(struct matrix **);
+int matrix_print_neighbors(Matrix **m);
+
+void matrix_free(Matrix **m);
