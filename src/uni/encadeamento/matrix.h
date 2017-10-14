@@ -57,13 +57,13 @@ int matrix_print(Matrix m);
  * @param m The reference to be used when printing its neighbours.
  * @returns
  */
-int matrix_print_neighbours(Matrix *m);
+int matrix_print_neighbours(MatrixNode *m);
 
 /**
  * @brief Frees the allocated Matrix.
  * @param m The matrix to be freed.
  */
-void matrix_free(Matrix *m);
+void matrix_free(MatrixNode *m);
 
 
 #endif // MATRIX_H
