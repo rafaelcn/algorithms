@@ -5,7 +5,7 @@
 
 /**
  *
- * Assignment  done under the Data Structures class in UTFPR.
+ * Assignment done under the Data Structures class in UTFPR.
  *
  * authors: Rafael Campos Nunes
  *          Mikael Messias
