@@ -1,6 +1,6 @@
 GCC = gcc
 CFLAGS = -std=c99 -Wall -W -pedantic
-CDFLAGS = -std=c99 -Wall -W -pedantic -g
+CDFLAGS = -std=c99 -Wall -W -pedantic -DDEBUG -g
 
 EXEC = matrix.out
 
