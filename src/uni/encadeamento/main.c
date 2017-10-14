@@ -35,7 +35,21 @@ int main(int argc, char **argv) {
 
     Matrix *m = matrix_init(x, y);
 
+    printf("\n\nTesting matrix_print\n\n");
+
     matrix_print(*m);
+
+    printf("\n\nTesting matrix_print_element\n\n");
+
+    matrix_print_element(matrix_get_by_coordinate(*m, 1, 2));
+    matrix_print_element(matrix_get_by_coordinate(*m, 2, 2));
+    matrix_print_element(matrix_get_by_coordinate(*m, 3, 2));
+
+    printf("\n\nTesting matrix_print_neighbours\n\n");
+
+    matrix_print_neighbours(matrix_get_by_coordinate(*m, 1, 1));
+    matrix_print_neighbours(matrix_get_by_coordinate(*m, 2, 1));
+    matrix_print_neighbours(matrix_get_by_coordinate(*m, 1, 2));
 
     matrix_free(*m);
 
