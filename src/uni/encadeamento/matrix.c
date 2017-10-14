@@ -20,6 +20,10 @@ struct node {
     MatrixNode *right;
 };
 
+
+static uint32_t rows;
+static uint32_t columns;
+
 /**
  * @brief Checks if a given pointer is NULL.
  * @returns An integer representing whether the pointer is NULL or not, the
@@ -38,7 +42,7 @@ static int check_pointer(void *p) {
  */
 static void pferror(const char *m, const int line) {
 #ifdef __linux__
-    fprintf(stderr, "\n%sError: %s | matrix.c on line %d%s\n", ANSI_COLOR_RED,
+    fprintf(stderr, "%sError: %s | matrix.c on line %d%s\n", ANSI_COLOR_RED,
             m, line, ANSI_COLOR_RESET);
 #elif
     fprintf(stderr, "\nError: %s | matrix.c on line %d\n", m, line);
@@ -78,6 +82,10 @@ Matrix *matrix_init(int x, int y) {
         pferror("Couldn't initialise the Matrix, exiting.", __LINE__);
         exit(1);
     }
+
+    // Set to be used in other functions
+    rows = x;
+    columns = y;
 
     // The process of creating the Matrix is create all the lines of the list
     // first and then create a double linked list and for each pair of lists
@@ -194,6 +202,12 @@ Matrix *matrix_init(int x, int y) {
         for (int j = 0; j < y; j++) {
             row->bottom = row_next;
             row_next->top = row;
+
+            // It only needs one verification
+            if (row->right != NULL) {
+                row = row->right;
+                row_next = row_next->right;
+            }
         }
     }
 
@@ -201,16 +215,67 @@ Matrix *matrix_init(int x, int y) {
     return m;
 }
 
+MatrixNode *matrix_get_by_coordinate(MatrixNode *m, uint32_t x, uint32_t y) {
+    if (check_pointer(m)) {
+        pferror("Argument given to matrix_get_by_coordinate is null",
+                __LINE__);
+        return NULL;
+    } else if (x >= rows || y >= columns) {
+        pferror("Values given are out of bounds", __LINE__);
+        return NULL;
+    }
+
+    MatrixNode *desired = m;
+
+    while (desired->pos_x != x) {
+        desired = desired->bottom;
+    }
+
+    while (desired->pos_y != y) {
+        desired = desired->right;
+    }
+
+    return desired;
+}
+
+MatrixNode *matrix_get_by_value(MatrixNode *m, int v) {
+    if (check_pointer(m)) {
+        pferror("Argument given to matrix_get_by_value is null", __LINE__);
+        return NULL;
+    }
+
+    MatrixNode *desired = NULL;
+
+    while (m->bottom != NULL) {
+        while (m->right != NULL) {
+            if (m->value == v) {
+                desired = m;
+                goto end;
+            }
+            m = m->right;
+        }
+
+        m = m->bottom;
+    }
+
+end:
+    return desired;
+}
 
 int matrix_print(Matrix m) {
+    if (check_pointer(m)) {
+        pferror("Argument given to matrix_print is null", __LINE__);
+        return 0;
+    }
+
     MatrixNode *HEAD = m;
 
-    newline
+    newline;
 
     while (HEAD != NULL) {
         m = HEAD;
         while (m != NULL) {
-            printf(" -- (%d, %d)", m->pos_x, m->pos_y);
+            printf(" -- [%d (%d,%d)]", m->value, m->pos_x, m->pos_y);
 
             // Rightmost column of the matrix.
             if (m->right == NULL) {
@@ -219,7 +284,7 @@ int matrix_print(Matrix m) {
 
             m = m->right;
         }
-        newline
+        newline;
 
         HEAD = HEAD->bottom;
     }
@@ -227,6 +292,17 @@ int matrix_print(Matrix m) {
     return 1;
 }
 
+
+int matrix_print_element(MatrixNode *m) {
+    if (m == NULL) {
+        pferror("Argument given to matrix_print_element is null", __LINE__);
+        return 0;
+    }
+
+    printf("\n[%d (%d,%d)]", m->value, m->pos_x, m->pos_y);
+
+    return 1;
+}
 
 void matrix_free(MatrixNode *m) {
     //The free method is described in the Free section of the paper.
