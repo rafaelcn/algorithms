@@ -1,17 +1,12 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
 /**
  *
  *
  * authors: Rafael Campos Nunes
  *          Mikael Messias
  */
-
-// ANSI color escaping sequences
-#ifdef __linux__
-    #define ANSI_COLOR_RED     "\x1b[31m"
-    #define ANSI_COLOR_GREEN   "\x1b[32m"
-    #define ANSI_COLOR_RESET   "\x1b[0m"
-#endif // __linux__
-
 
 typedef struct node* Matrix;
 typedef struct node MatrixNode;
@@ -67,3 +62,6 @@ int matrix_print_neighbours(Matrix *m);
  * @param m The matrix to be freed.
  */
 void matrix_free(Matrix *m);
+
+
+#endif // MATRIX_H
