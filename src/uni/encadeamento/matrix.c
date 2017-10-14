@@ -321,24 +321,39 @@ int matrix_print_neighbours(MatrixNode *m) {
         return 1;
     }
 
-    if (!check_pointer(m->left)) {
-        printf("\nleft [%d (%d,%d)]", (m->left)->value, (m->left)->pos_x,
-               (m->left)->pos_y);
+
+    // Should minimise this code using some sort of generalization
+    if (!check_pointer(m->top)) {
+        printf("\t\t  [%d (%d,%d)]\n", (m->top)->value, (m->top)->pos_x,
+               (m->top)->pos_y);
+    }  else {
+        printf("\t\t    %sNULL%s\n", ANSI_COLOR_RED, ANSI_COLOR_RESET);
     }
+
+
+    if (!check_pointer(m->left)) {
+        printf("\t[%d (%d,%d)] ", (m->left)->value, (m->left)->pos_x,
+               (m->left)->pos_y);
+    } else {
+        printf("\t     %sNULL%s ", ANSI_COLOR_RED, ANSI_COLOR_RESET);
+    }
+
+    printf("%s[%d (%d,%d)]%s", ANSI_COLOR_GREEN, m->value, m->pos_x,
+           m->pos_y, ANSI_COLOR_RESET);
 
     if (!check_pointer(m->right)) {
-        printf("\nright [%d (%d,%d)]", (m->right)->value, (m->right)->pos_x,
+        printf(" [%d (%d,%d)]", (m->right)->value, (m->right)->pos_x,
                (m->right)->pos_y);
+    } else {
+        printf(" %sNULL%s", ANSI_COLOR_RED, ANSI_COLOR_RESET);
     }
 
-    if (!check_pointer(m->top)) {
-        printf("\ntop [%d (%d,%d)]", (m->top)->value, (m->top)->pos_x,
-               (m->top)->pos_y);
-    }
 
     if (!check_pointer(m->bottom)) {
-        printf("\nbottom [%d (%d,%d)]", (m->bottom)->value,
+        printf("\n\t\t  [%d (%d,%d)]", (m->bottom)->value,
                (m->bottom)->pos_x, (m->bottom)->pos_y);
+    }  else {
+        printf("\n\t\t    %sNULL%s", ANSI_COLOR_RED, ANSI_COLOR_RESET);
     }
 
     newline;
