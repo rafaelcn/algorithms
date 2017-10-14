@@ -47,6 +47,8 @@ int main(int argc, char **argv) {
 
     printf("\n\nTesting matrix_print_neighbours\n\n");
 
+    matrix_print_neighbours(matrix_get_by_coordinate(*m, 0, 1));
+    matrix_print_neighbours(matrix_get_by_coordinate(*m, 0, 0));
     matrix_print_neighbours(matrix_get_by_coordinate(*m, 1, 1));
     matrix_print_neighbours(matrix_get_by_coordinate(*m, 2, 1));
     matrix_print_neighbours(matrix_get_by_coordinate(*m, 1, 2));
@@ -61,4 +63,7 @@ void usage() {
     printf("\n\nWhere: ");
     printf("\nx - Rows of the matrix");
     printf("\ny - Columns of the matrix");
+    printf("\n\nFlags available:");
+    printf("\n--help");
+    printf("\n--interactive");
 }
