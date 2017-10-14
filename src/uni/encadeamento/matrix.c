@@ -185,11 +185,12 @@ Matrix *matrix_init(int x, int y) {
         }
     }
 
+    MatrixNode *row_walker = *m;
 
-    // Concat every how of the Matrix
+    // Concatenation of every row of the Matrix
     for (int i = 0; i < x; i++) {
-        MatrixNode *row = *m;
-        MatrixNode *row_next = (*m)->bottom;
+        MatrixNode *row = row_walker;
+        MatrixNode *row_next = row_walker->bottom;
 
         if (row_next == NULL) {
             break;
@@ -209,6 +210,8 @@ Matrix *matrix_init(int x, int y) {
                 row_next = row_next->right;
             }
         }
+
+        row_walker = row_walker->bottom;
     }
 
 
@@ -250,6 +253,13 @@ MatrixNode *matrix_get_by_value(MatrixNode *m, int v) {
         while (m->right != NULL) {
             if (m->value == v) {
                 desired = m;
+                // While some might say that a goto is not a ideal solution
+                // but it is, and here's why:
+                // Otherwise to break a nested loop I'd have to use flags,
+                // they would cost a little bit of memory which I wouldn't
+                // like to spare. Further on unconditional jmps are
+                // everywhere in machine code, I'm just exploring it on this
+                // level.
                 goto end;
             }
             m = m->right;
@@ -302,6 +312,37 @@ int matrix_print_element(MatrixNode *m) {
     printf("\n[%d (%d,%d)]", m->value, m->pos_x, m->pos_y);
 
     return 1;
+}
+
+int matrix_print_neighbours(MatrixNode *m) {
+    if (check_pointer(m)) {
+        pferror("Argument given to matrix_print_neighbours is null",
+                __LINE__);
+        return 1;
+    }
+
+    if (!check_pointer(m->left)) {
+        printf("\nleft [%d (%d,%d)]", (m->left)->value, (m->left)->pos_x,
+               (m->left)->pos_y);
+    }
+
+    if (!check_pointer(m->right)) {
+        printf("\nright [%d (%d,%d)]", (m->right)->value, (m->right)->pos_x,
+               (m->right)->pos_y);
+    }
+
+    if (!check_pointer(m->top)) {
+        printf("\ntop [%d (%d,%d)]", (m->top)->value, (m->top)->pos_x,
+               (m->top)->pos_y);
+    }
+
+    if (!check_pointer(m->bottom)) {
+        printf("\nbottom [%d (%d,%d)]", (m->bottom)->value,
+               (m->bottom)->pos_x, (m->bottom)->pos_y);
+    }
+
+    newline;
+    newline;
 }
 
 void matrix_free(MatrixNode *m) {
