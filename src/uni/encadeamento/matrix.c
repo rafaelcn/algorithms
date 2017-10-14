@@ -119,10 +119,10 @@ Matrix *matrix_init(int x, int y) {
 
 #ifdef DEBUG
         const char *message = "Creating HEAD %d. Walker %p |\
- Walker's bottom is %p";
-        int size = snprintf(NULL, 0, message, i, walker, walker->bottom);
+ Walker's top is %p";
+        int size = snprintf(NULL, 0, message, i, walker, walker->top);
         char buffer[size+1];
-        snprintf(buffer, size, message, i, walker, walker->bottom);
+        snprintf(buffer, size, message, i, walker, walker->top);
         pfinfo(buffer);
 #endif // DEBUG
     }
@@ -133,7 +133,7 @@ Matrix *matrix_init(int x, int y) {
         if (i == 0) {
             // Points to the first position of the Matrix available
 
-            // This looks like Macgyver, need to revisit this later.
+            // FIXME: This looks like Macgyver, need to revisit this later.
             while (walker->top != NULL) {
                 walker = walker->top;
             }
@@ -167,7 +167,7 @@ Matrix *matrix_init(int x, int y) {
 #ifdef DEBUG
             const char *message = "Creating element %d. Row walker %p |\
  Row walker's left is %p";
-            int size = snprintf(NULL, 0, message, j, HEAD, HEAD->right);
+            int size = snprintf(NULL, 0, message, j, HEAD, HEAD->left);
             char buffer[size+1];
             snprintf(buffer, size, message, j, HEAD, HEAD->left);
             pfinfo(buffer);
@@ -176,6 +176,27 @@ Matrix *matrix_init(int x, int y) {
             HEAD = e;
         }
     }
+
+
+    // Concat every how of the Matrix
+    for (int i = 0; i < x; i++) {
+        MatrixNode *row = *m;
+        MatrixNode *row_next = (*m)->bottom;
+
+        if (row_next == NULL) {
+            break;
+        }
+
+        // Move one column right
+        row = row->right;
+        row_next = row_next->right;
+
+        for (int j = 0; j < y; j++) {
+            row->bottom = row_next;
+            row_next->top = row;
+        }
+    }
+
 
     return m;
 }
@@ -207,14 +228,23 @@ int matrix_print(Matrix m) {
 }
 
 
-void matrix_free(Matrix *m) {
+void matrix_free(MatrixNode *m) {
     //The free method is described in the Free section of the paper.
-    MatrixNode *walker = *m;
+    MatrixNode *walker = m;
 
     // Walker starts at 0x0 if not we have to reset its position.
     while(walker != NULL) {
-        while (walker->right != NULL) {
+        m = walker;
+
+        while (m != NULL) {
+            MatrixNode *e = m;
+            m = m->right;
+
+            free(e);
         }
+
         walker = walker->bottom;
     }
+
+    free(m);
 }
