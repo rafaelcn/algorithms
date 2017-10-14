@@ -3,9 +3,11 @@
 
 /**
  *
+ * Assignment  done under the Data Structures class in UTFPR.
  *
  * authors: Rafael Campos Nunes
  *          Mikael Messias
+ *
  */
 
 typedef struct node* Matrix;

@@ -3,7 +3,9 @@
 
 #include <inttypes.h>
 
+#include "macros.h"
 #include "matrix.h"
+
 
 struct node {
     int value;
@@ -64,8 +66,9 @@ static void print_heads(MatrixNode *mn) {
         return;
     }
 
+    // Print in the reverse order.
+    print_heads(mn->top);
     printf("\n\t--(%d)--\n\t%4s", mn->value, "|");
-    print_heads(mn->bottom);
 }
 
 Matrix *matrix_init(int x, int y) {
@@ -80,11 +83,10 @@ Matrix *matrix_init(int x, int y) {
     // first and then create a double linked list and for each pair of lists
     // concatenate (link) those sublist together.
 
-
     // Walks along the HEADs.
     MatrixNode* walker = NULL;
 
-    // Create every HEAD
+    // Create every HEAD of the Matrix
     for (int i = 0; i < x; i++) {
         // Creating the HEAD node of the Matrix
         MatrixNode *HEAD = malloc(sizeof(MatrixNode));
@@ -102,13 +104,13 @@ Matrix *matrix_init(int x, int y) {
         // Only for testing purposes
         HEAD->value = i;
 
-        if (*m == NULL) { // Empty Matrix
+        if (*m == NULL) {
+            // Empty Matrix
             HEAD->top = HEAD->bottom = NULL;
             *m = HEAD;
         } else {
-            // The walker is ...
-            walker->top = HEAD;
-            HEAD->bottom = walker;
+            walker->bottom = HEAD;
+            HEAD->top = walker;
         }
 
         HEAD->left = HEAD->right = NULL;
@@ -116,26 +118,30 @@ Matrix *matrix_init(int x, int y) {
         walker = HEAD;
 
 #ifdef DEBUG
-        const char *message = "Creating HEAD %d. Walker is %p";
-        int size = snprintf(NULL, 0, message, i, walker->bottom);
+        const char *message = "Creating HEAD %d. Walker %p |\
+ Walker's bottom is %p";
+        int size = snprintf(NULL, 0, message, i, walker, walker->bottom);
         char buffer[size+1];
-        snprintf(buffer, size, message, i, walker->bottom);
+        snprintf(buffer, size, message, i, walker, walker->bottom);
         pfinfo(buffer);
 #endif // DEBUG
     }
 
-    //print_heads(walker);
-
+    // Creating every line for each HEAD.
     for (int i = 0; i < x; i++) {
         MatrixNode* HEAD = NULL;
         if (i == 0) {
-            // points to the first HEAD available
+            // Points to the first position of the Matrix available
+
+            // This looks like Macgyver, need to revisit this later.
+            while (walker->top != NULL) {
+                walker = walker->top;
+            }
+
             HEAD = walker;
         } else {
-            if (walker->bottom != NULL) {
-                HEAD = walker->bottom;
-                walker = walker->bottom;
-            }
+            HEAD = walker->bottom;
+            walker = walker->bottom;
 
             HEAD = walker;
         }
@@ -148,35 +154,53 @@ Matrix *matrix_init(int x, int y) {
                 exit(1);
             }
 
+            HEAD->right = e;
+
             e->left = HEAD;
-            e->right = NULL;
             e->bottom = e->top = NULL;
             // not sure if the below will work well
-            e->pos_x = i+1;
+            e->pos_x = i;
             e->pos_y = j;
             e->value = i+j;
 
-            HEAD->right = e;
+
+#ifdef DEBUG
+            const char *message = "Creating element %d. Row walker %p |\
+ Row walker's left is %p";
+            int size = snprintf(NULL, 0, message, j, HEAD, HEAD->right);
+            char buffer[size+1];
+            snprintf(buffer, size, message, j, HEAD, HEAD->left);
+            pfinfo(buffer);
+#endif // DEBUG
 
             HEAD = e;
         }
     }
-
-    matrix_print(*m);
 
     return m;
 }
 
 
 int matrix_print(Matrix m) {
-    MatrixNode *walker = m;
+    MatrixNode *HEAD = m;
 
-    while(walker != NULL) {
-        while (walker->right != NULL) {
-            printf("\n\t--(%d)--\n\t%4s", walker->value, "|");
-            walker = walker->right;
+    newline
+
+    while (HEAD != NULL) {
+        m = HEAD;
+        while (m != NULL) {
+            printf(" -- (%d, %d)", m->pos_x, m->pos_y);
+
+            // Rightmost column of the matrix.
+            if (m->right == NULL) {
+                printf(" --");
+            }
+
+            m = m->right;
         }
-        walker = walker->bottom;
+        newline
+
+        HEAD = HEAD->bottom;
     }
 
     return 1;
