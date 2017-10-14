@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include "matrix.h"
 
-int main(){
-	
-	return 1;
+int main(void) {
+
+    Matrix *m = matrix_init(3, 3);
+
+    return 0;
 }
