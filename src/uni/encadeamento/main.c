@@ -36,9 +36,11 @@ int main(int argc, char **argv) {
             interactive();
         } else if (strcmp(argv[1], "--test") == 0) {
             test(argc, argv);
+        } else {
+            usage();
         }
     } else {
-        usage();
+        test(argc, argv);
     };
 
     return 0;
