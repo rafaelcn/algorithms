@@ -65,6 +65,13 @@ int matrix_print(Matrix m);
 
 
 /**
+ * @brief Recursive function that prints information about each head of the
+ * Matrix.
+ * @param m The first Matrix head.
+ */
+void matrix_print_heads(MatrixNode *m);
+
+/**
  * @brief Prints a MatrixNode.
  * @param m A pointer to the MatrixNode to be printed.
  * @returns 1 on success and 0 if it didn't succeed.

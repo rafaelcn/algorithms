@@ -61,20 +61,6 @@ static void pfinfo(const char *m) {
 #endif // __linux__
 }
 
-/**
- * @brief Recursive function that prints information about each head of the
- * Matrix.
- */
-static void print_heads(MatrixNode *mn) {
-    if (mn == NULL) {
-        return;
-    }
-
-    // Print in the reverse order.
-    print_heads(mn->top);
-    printf("\n\t--(%d)--\n\t%4s", mn->value, "|");
-}
-
 Matrix *matrix_init(int x, int y) {
     Matrix *m = (Matrix*) malloc(sizeof(Matrix*));
 
@@ -311,6 +297,14 @@ int matrix_print(Matrix m) {
     return 1;
 }
 
+void matrix_print_heads(MatrixNode *m) {
+    if (check_pointer(m)) {
+        return;
+    }
+
+    printf("\n\t--(%d)--\n\t%4s", m->value, "|");
+    matrix_print_heads(m->bottom);
+}
 
 int matrix_print_element(MatrixNode *m) {
     if (m == NULL) {
