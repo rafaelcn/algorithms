@@ -41,12 +41,20 @@ int matrix_insert(Matrix *m, int x, int y, int v);
 MatrixNode *matrix_get_by_coordinate(MatrixNode *m, uint32_t x, uint32_t y);
 
 /**
- * @brief Searches for a MatrixNode with the given value v.
+ * @brief Searches for a MatrixNode with the given value v, if there is more
+ * than one, it returns the first MatrixNode found.
  * @param m The Matrix to be searched on.
  * @param v The value to be used on search.
  * @returns A pointer to a MatrixNode or NULL on not found.
  */
 MatrixNode *matrix_get_by_value(MatrixNode *m, int v);
+
+/**
+ * @brief It returns the value stored in a MatrixNode m.
+ * @param m A pointer to a MatrixNode.
+ * @returns An integer representing the value stored in the MatrixNode.
+ */
+int *matrix_get_value(MatrixNode *m);
 
 /**
  * @brief Prints the matrix structure

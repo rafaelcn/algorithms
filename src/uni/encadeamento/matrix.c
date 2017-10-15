@@ -272,6 +272,15 @@ end:
     return desired;
 }
 
+int *matrix_get_value(MatrixNode *m) {
+    if (check_pointer(m)) {
+        pferror("MatrixNode given is null", __LINE__);
+        return NULL;
+    }
+
+    return &(m->value);
+}
+
 int matrix_print(Matrix m) {
     if (check_pointer(m)) {
         pferror("Argument given to matrix_print is null", __LINE__);
@@ -318,7 +327,7 @@ int matrix_print_neighbours(MatrixNode *m) {
     if (check_pointer(m)) {
         pferror("Argument given to matrix_print_neighbours is null",
                 __LINE__);
-        return 1;
+        return 0;
     }
 
 
@@ -358,6 +367,8 @@ int matrix_print_neighbours(MatrixNode *m) {
 
     newline;
     newline;
+
+    return 1;
 }
 
 void matrix_free(MatrixNode *m) {
