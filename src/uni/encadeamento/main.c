@@ -15,7 +15,7 @@
 // Prints usage about the program.
 void usage();
 // Prints an interactive Menu where you can mess with everything.
-void menu();
+void interactive();
 // Does a testing of the matrix functions suite.
 int test(int argc, char **argv);
 // Test if a matrix is pointer is null or not.
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
             usage();
             return 0;
         } else if (strcmp(argv[1], "--interactive") == 0) {
-            menu();
+            interactive();
         } else if (strcmp(argv[1], "--test") == 0) {
             test(argc, argv);
         }
@@ -53,11 +53,6 @@ void usage() {
     printf("\n\nWhere: ");
     printf("\n\tx - Rows of the matrix");
     printf("\n\ty - Columns of the matrix\n");
-}
-
-void interactive() {
-
-
 }
 
 int test(int argc, char **argv) {
@@ -111,7 +106,7 @@ int test(int argc, char **argv) {
     return 0;
 }
 
-void menu() {
+void interactive() {
     // The chosen option in the menu
     int op = 0;
 

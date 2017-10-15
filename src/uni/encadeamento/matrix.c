@@ -369,7 +369,6 @@ void matrix_free(MatrixNode *m) {
     //The free method is described in the Free section of the paper.
     MatrixNode *walker = m;
 
-    // Walker starts at 0x0 if not we have to reset its position.
     while(walker != NULL) {
         m = walker;
 
