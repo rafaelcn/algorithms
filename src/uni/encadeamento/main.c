@@ -146,18 +146,22 @@ void menu() {
         case 2:
             break;
         case 3:
-            printf("\nEnter the position of the MatrixNode: ");
-            scanf("%d %d", &x, &y);
+            if (check_matrix(m)) {
+                printf("\nEnter the position of the MatrixNode: ");
+                scanf("%d %d", &x, &y);
 
-            matrix_print_element(matrix_get_by_coordinate(*m, x, y));
+                matrix_print_element(matrix_get_by_coordinate(*m, x, y));
+            }
             break;
         case 4: {
-            int v = 0;
+            if (check_matrix(m)) {
+                int v = 0;
 
-            printf("\nEnter the value of the MatrixNode: ");
-            scanf("%d", &v);
+                printf("\nEnter the value of the MatrixNode: ");
+                scanf("%d", &v);
 
-            matrix_print_element(matrix_get_by_value(*m, v));
+                matrix_print_element(matrix_get_by_value(*m, v));
+            }
             break;
         }
         case 5:
@@ -171,10 +175,12 @@ void menu() {
             }
             break;
         case 7:
-            printf("Enter the position of the MatrixNode: ");
-            scanf("%d %d", &x, &y);
+            if (check_matrix(m)) {
+                printf("Enter the position of the MatrixNode: ");
+                scanf("%d %d", &x, &y);
 
-            matrix_print_neighbours(matrix_get_by_coordinate(*m, x, y));
+                matrix_print_neighbours(matrix_get_by_coordinate(*m, x, y));
+            }
             break;
         case 8:
             break;
@@ -184,10 +190,12 @@ void menu() {
             printf("Invalid option. Enter a valid one [1-9].\n");
         }
     }
+
+    matrix_free(*m);
 }
 
 int check_matrix(Matrix *m) {
-    if (*m != NULL) {
+    if (m != NULL) {
         return 1;
     } else {
         printf("\nCreate a Matrix first.\n");
