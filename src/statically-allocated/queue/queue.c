@@ -10,7 +10,7 @@ struct queue_ {
     /// Points to the last value inserted on the queue.
     int head;
     /// Points to the current value at which will be removed.
-    int idx_ptr;
+    int tail;
     /// The data of the structure.
     int data[QUEUE_SIZE];
 };
@@ -29,7 +29,7 @@ Queue *queue_init() {
 
     q->head = -1;
     // it starts by pointing to the 0 element of the Queue
-    q->idx_ptr = 0;
+    q->tail = 0;
 
     int i;
     for (i = 0; i < QUEUE_SIZE; i++) {
@@ -55,8 +55,8 @@ int queue_push(Queue *q, int value) {
 int queue_pop(Queue *q) {
     if (check_pointer(q)) {
         if (!queue_empty(q)) {
-            int v = q->data[q->idx_ptr];
-            q->idx_ptr++;
+            int v = q->data[q->tail];
+            q->tail++;
             return v;
         } else {
             pferror("Queue is empty.", __LINE__);
@@ -68,8 +68,8 @@ int queue_pop(Queue *q) {
 
 int queue_empty(Queue *q) {
     if (check_pointer(q)) {
-        if (q->idx_ptr > QUEUE_SIZE || q->idx_ptr == -1 ||
-            q->idx_ptr > q->head) {
+        if (q->tail > QUEUE_SIZE || q->tail == -1 ||
+            q->tail > q->head) {
             return 1;
         }
     }
