@@ -67,7 +67,6 @@ int *matrix_get_value(MatrixNode *m);
  */
 int matrix_print(Matrix m);
 
-
 /**
  * @brief Recursive function that prints information about each head of the
  * Matrix.
