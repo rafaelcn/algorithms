@@ -37,6 +37,21 @@ Matrix *matrix_init(int x, int y);
 int matrix_insert(Matrix *m, int x, int y, int v);
 
 /**
+ * @brief Removes the MatrixNode at an x,y position.
+ * @param m A pointer to a MatrixNode.
+ * @param x The coordinate x where the MatrixNode is.
+ * @param y The coordinate y where the MatrixNode is.
+ */
+int matrix_remove_by_coordinate(Matrix *m, uint32_t x, uint32_t y);
+
+/**
+ * @brief Removes the MatrixNode with the given value v.
+ * @param m A pointer to a MatrixNode.
+ * @param v The value to be removed from the Matrix.
+ */
+int matrix_remove_by_value(Matrix *m, int v);
+
+/**
  * @brief Searched for a MatrixNode on the coordinate x,y.
  * @param m The Matrix to be searched on.
  * @param x The coordinate x.
