@@ -12,6 +12,10 @@
  *
  */
 
+
+/**
+ * @brief Typedefs to abstract the idea of a Matrix and a MatrixNode.
+ */
 typedef struct node* Matrix;
 typedef struct node MatrixNode;
 
@@ -78,7 +82,6 @@ int *matrix_get_value(MatrixNode *m);
  */
 int matrix_print(Matrix m);
 
-
 /**
  * @brief Recursive function that prints information about each head of the
  * Matrix.
@@ -96,7 +99,8 @@ int matrix_print_element(MatrixNode *m);
 /**
  * @brief Print neighbours of an specific MatrixNode.
  * @param m The reference to be used when printing its neighbours.
- * @returns
+ * @returns An integer representing whether or not it could print the
+ * neighbours of the MatrixNode m.
  */
 int matrix_print_neighbours(MatrixNode *m);
 

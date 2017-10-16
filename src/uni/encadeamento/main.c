@@ -15,7 +15,7 @@
 // Prints usage about the program.
 void usage();
 // Prints an interactive Menu where you can mess with everything.
-void menu();
+void interactive();
 // Does a testing of the matrix functions suite.
 int test(int argc, char **argv);
 // Test if a matrix is pointer is null or not.
@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     // Little fix for windows shitty console (I'm looking at you CMD.exe).
 	set_locale(LC_ALL, "");
 #endif // __windows__
+
 
 	if (argc > 1) {
 		if (strcmp(argv[1], "--help") == 0) {
@@ -53,11 +54,6 @@ void usage() {
 	printf("\n\nWhere: ");
 	printf("\n\tx - Rows of the matrix");
 	printf("\n\ty - Columns of the matrix\n");
-}
-
-void interactive() {
-
-
 }
 
 int test(int argc, char **argv) {
@@ -111,7 +107,7 @@ int test(int argc, char **argv) {
 	return 0;
 }
 
-void menu() {
+void interactive() {
     // The chosen option in the menu
 	int op = 0;
 
@@ -120,7 +116,7 @@ void menu() {
 	int x, y;
 	int v;
 
-	while (op != 9){
+	while (op != 10){
 		printf("\n1 -> Create a Matrix\n");
 		printf("2 -> Create a MatrixNode\n");
 		printf("3 -> Get a MatrixNode by coordinate\n");
