@@ -6,3 +6,8 @@
 
 # Doxyfile
 doxyfile
+
+# Kinds of FS or zipped files
+*.rar
+*.zip
+*.tar
