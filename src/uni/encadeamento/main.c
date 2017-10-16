@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
             usage();
             return 0;
         } else if (strcmp(argv[1], "--interactive") == 0) {
-            menu();
+            interactive();
         } else if (strcmp(argv[1], "--test") == 0) {
             test(argc, argv);
         }
@@ -203,8 +203,7 @@ void interactive() {
         case 10:
             break;
         default:
-            printf("Invalid option. Enter a valid one \\
-[1-10]\n");
+            printf("Invalid option. Enter a valid one [1-10]\n");
         }
     }
 

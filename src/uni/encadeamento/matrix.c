@@ -208,10 +208,10 @@ int matrix_insert(Matrix *m, uint32_t x, uint32_t y, int v) {
     if (check_pointer(m)) {
         pferror("Argument given to matrix_insert is null",
                 __LINE__);
-        return NULL;
+        return 0;
     } else if (x >= rows || y >= columns) {
         pferror("Values given are out of bounds", __LINE__);
-        return NULL;
+        return 0;
     }
 
     MatrixNode *walker = *m;
@@ -225,15 +225,17 @@ int matrix_insert(Matrix *m, uint32_t x, uint32_t y, int v) {
     }
 
     walker->value = v;
+    return 1;
 }
 
 int matrix_remove_by_coordinate(Matrix *m, uint32_t x, uint32_t y) {
     if (check_pointer(m)) {
-        pferror("Argument given to matrix_remove_by_coordinate is null", __LINE__);
-        return NULL;
+        pferror("Argument given to matrix_remove_by_coordinate is null",
+                __LINE__);
+        return 0;
     } else if (x >= rows || y >= columns) {
         pferror("Values given are out of bounds", __LINE__);
-        return NULL;
+        return 0;
     }
 
     MatrixNode *walker = *m;
@@ -263,12 +265,14 @@ int matrix_remove_by_coordinate(Matrix *m, uint32_t x, uint32_t y) {
         }
         free(walker);
     }
+
+    return 1;
 }
 
 int matrix_remove_by_value(Matrix *m, int v) {
     if (check_pointer(m)) {
         pferror("Argument given to matrix_remove_by_value is null", __LINE__);
-        return NULL;
+        return 0;
     }
 
     MatrixNode *HEAD = *m, *walker = *m;
@@ -295,6 +299,8 @@ int matrix_remove_by_value(Matrix *m, int v) {
         }
         HEAD = HEAD->bottom;
     }
+
+    return 1;
 }
 
 MatrixNode *matrix_get_by_coordinate(MatrixNode *m, uint32_t x, uint32_t y) {
