@@ -204,6 +204,92 @@ Matrix *matrix_init(int x, int y) {
     return m;
 }
 
+int matrix_insert(Matrix *m, uint32_t x, uint32_t y, int v) {
+	 if (check_pointer(m)) {
+        pferror("Argument given to matrix_insert is null",
+                __LINE__);
+        return NULL;
+    } else if (x >= rows || y >= columns) {
+        pferror("Values given are out of bounds", __LINE__);
+        return NULL;
+    }
+
+    MatrixNode *walker = *m;
+
+    while(walker->pos_x != x && walker->bottom != NULL){
+    	walker = walker->bottom;
+    }
+
+    while(walker->pos_y != y && walker->right != NULL){
+    	walker = walker->right;
+    }
+
+   
+    	walker->value = v;
+}
+
+int matrix_remove_by_coordinate(Matrix *m, uint32_t x, uint32_t y) {
+	if (check_pointer(m)) {
+		pferror("Argument given to matrix_remove_by_coordinate is null", __LINE__);
+		return NULL;
+	} else if (x >= rows || y >= columns) {
+		pferror("Values given are out of bounds", __LINE__);
+		return NULL;
+	}
+	
+	MatrixNode *walker = *m;
+
+	while (walker->pos_x != x) {
+		walker = walker->bottom;
+	}
+	while (walker->pos_y != y) {
+		walker = walker->right;
+	}
+
+    if (check_pointer(walker)) {
+    	pferror("Unable to find this coordinate", __LINE__);
+    }
+    else {
+    	if (walker->top != NULL) 
+    		walker->top->bottom = walker->bottom;
+    	if (walker->bottom != NULL) 
+    		walker->bottom->top = walker->top;
+    	if (walker->left != NULL)
+    		walker->left->right = walker->right;
+    	if (walker->right != NULL)
+    		walker->right->left = walker->left;
+    	free(walker);
+    }
+}
+
+int matrix_remove_by_value(Matrix *m, int v) {
+	if (check_pointer(m)) {
+		pferror("Argument given to matrix_remove_by_value is null", __LINE__);
+		return NULL;
+	} 
+
+	MatrixNode *HEAD = *m, *walker = *m;
+
+	while (HEAD->bottom != NULL) {
+		walker = HEAD;
+		while (walker->right != NULL) {
+			if (walker->value == v){
+				if (walker->top != NULL) 
+		    		walker->top->bottom = walker->bottom;
+		    	if (walker->bottom != NULL) 
+		    		walker->bottom->top = walker->top;
+		    	if (walker->left != NULL)
+		    		walker->left->right = walker->right;
+		    	if (walker->right != NULL)
+		    		walker->right->left = walker->left;
+		    	free(walker);
+			}
+			walker = walker->right;
+		}
+		HEAD = HEAD->bottom;
+	}
+}
+
 MatrixNode *matrix_get_by_coordinate(MatrixNode *m, uint32_t x, uint32_t y) {
     if (check_pointer(m)) {
         pferror("Argument given to matrix_get_by_coordinate is null",

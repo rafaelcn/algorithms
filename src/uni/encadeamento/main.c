@@ -118,6 +118,7 @@ void menu() {
     Matrix* m;
     // Coordinates of the Matrix
     int x, y;
+    int v;
 
     while (op != 9){
         printf("\n1 -> Create a Matrix\n");
@@ -127,8 +128,9 @@ void menu() {
         printf("5 -> Print the Matrix\n");
         printf("6 -> Print the Matrix HEADS\n");
         printf("7 -> Print the neighbours of a given MatrixNode\n");
-        printf("8 -> Remove a MatrixNode\n");
-        printf("9 -> Exit\n");
+        printf("8 -> Remove a MatrixNode by coordinate\n");
+        printf("9 -> Remove a MatrixNode by value\n");
+        printf("10 -> Exit\n");
         printf(": ");
 
         scanf("%d", &op);
@@ -144,12 +146,16 @@ void menu() {
             break;
         }
         case 2:
+            printf("\nEnter the position where the value should be inserted: ");
+            scanf("%d %d", &x, &y);
+            printf("\nEnter the value to be inserted: \n");
+            scanf("%d", &v);
+        	matrix_insert(m,x,y,v);
             break;
         case 3:
             if (check_matrix(m)) {
                 printf("\nEnter the position of the MatrixNode: ");
                 scanf("%d %d", &x, &y);
-
                 matrix_print_element(matrix_get_by_coordinate(*m, x, y));
             }
             break;
@@ -183,11 +189,19 @@ void menu() {
             }
             break;
         case 8:
+            printf("\nEnter the position of the MatrixNode to be removed: ");
+            scanf("%d %d", &x, &y);
+        	matrix_remove_by_coordinate(m,x,y);
             break;
         case 9:
+            printf("\nEnter the value of the MatrixNode to be removed: ");
+            scanf("%d", &v);
+        	matrix_remove_by_value(m,v);
+            break;
+        case 10:
             break;
         default:
-            printf("Invalid option. Enter a valid one [1-9].\n");
+            printf("Invalid option. Enter a valid one [1-10].\n");
         }
     }
 
