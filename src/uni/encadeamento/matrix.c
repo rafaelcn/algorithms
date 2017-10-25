@@ -398,6 +398,7 @@ int matrix_print(Matrix m) {
 
 void matrix_print_heads(MatrixNode *m) {
     if (check_pointer(m)) {
+        pferror("Argument given to matrix_print_heads is null", __LINE__);
         return;
     }
 
@@ -406,7 +407,7 @@ void matrix_print_heads(MatrixNode *m) {
 }
 
 int matrix_print_element(MatrixNode *m) {
-    if (m == NULL) {
+    if (check_pointer(m)) {
         pferror("Argument given to matrix_print_element is null", __LINE__);
         return 0;
     }
