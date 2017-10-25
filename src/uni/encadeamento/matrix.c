@@ -113,7 +113,7 @@ Matrix *matrix_init(int x, int y) {
 
 #ifdef DEBUG
         const char *message = "Creating HEAD %d. Walker %p |\
-		Walker's top is %p";
+Walker's top is %p";
         int size = snprintf(NULL, 0, message, i, walker, walker->top);
         char buffer[size+1];
         snprintf(buffer, size, message, i, walker, walker->top);
@@ -160,7 +160,7 @@ Matrix *matrix_init(int x, int y) {
 
 #ifdef DEBUG
             const char *message = "Creating element %d. Row walker %p |\
-			Row walker's left is %p";
+Row walker's left is %p";
             int size = snprintf(NULL, 0, message, j, HEAD, HEAD->left);
             char buffer[size+1];
             snprintf(buffer, size, message, j, HEAD, HEAD->left);
