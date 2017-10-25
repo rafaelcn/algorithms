@@ -143,7 +143,8 @@ void interactive() {
         }
         case 2:
             if (check_matrix(m)) {
-                printf("\nEnter the position where the value should be inserted: ");
+                printf("\nEnter the position where the value should be \
+inserted: ");
                 scanf("%d %d", &x, &y);
                 printf("\nEnter the value to be inserted: \n");
                 scanf("%d", &v);
@@ -188,7 +189,8 @@ void interactive() {
             break;
         case 8:
             if (check_matrix(m)) {
-                printf("\nEnter the position of the MatrixNode to be removed: ");
+                printf("\nEnter the position of the MatrixNode to be removed:\
+ ");
                 scanf("%d %d", &x, &y);
                 matrix_remove_by_coordinate(m,x,y);
             }
