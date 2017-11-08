@@ -209,7 +209,9 @@ inserted: ");
         }
     }
 
-    matrix_free(*m);
+    if (m != NULL) {
+        matrix_free(*m);
+    }
 }
 
 int check_matrix(Matrix *m) {

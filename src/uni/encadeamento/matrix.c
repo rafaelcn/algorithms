@@ -228,7 +228,7 @@ int matrix_insert(Matrix *m, uint32_t x, uint32_t y, int v) {
     return 1;
 }
 
-int matrix_remove_by_coordinate(Matrix *m, uint32_t x, uint32_t y) {
+int matrix_remove_by_coordinate(Matrix* m, uint32_t x, uint32_t y) {
     if (check_pointer(m)) {
         pferror("Argument given to matrix_remove_by_coordinate is null",
                 __LINE__);
@@ -238,31 +238,104 @@ int matrix_remove_by_coordinate(Matrix *m, uint32_t x, uint32_t y) {
         return 0;
     }
 
-    MatrixNode *walker = *m;
+    MatrixNode *HEAD = *m;
 
-    while (walker->pos_x != x) {
-        walker = walker->bottom;
+    // Walks through the head of all rows until it finds the position y.
+    while(HEAD->bottom != NULL && HEAD->pos_x != x) {
+        HEAD = HEAD->bottom;
     }
-    while (walker->pos_y != y) {
+
+    MatrixNode *walker = HEAD;
+
+    // Walks through the columns in position x until it finds the position y.
+    while(walker->right != NULL && walker->pos_y != y) {
         walker = walker->right;
     }
 
-    if (check_pointer(walker)) {
+    if (walker->pos_x != x && walker->pos_y != y) {
         pferror("Unable to find this coordinate", __LINE__);
+        return 0;
     }
     else {
-        if (walker->top != NULL) {
-            walker->top->bottom = walker->bottom;
+        // It does not look right, but I wasn't able to do the removal without those auxiliary pointers.
+        MatrixNode *next = walker, *tmp = next->left;
+
+        // Walks through the row until it finds the last element.
+        while(next->right != NULL) {
+            next = next->right;
         }
-        if (walker->bottom != NULL) {
-            walker->bottom->top = walker->top;
+
+        uint32_t i = walker->pos_y + 1;
+
+        // Rearranges the pointers of nodes close to the one to be removed: 
+        // the last of the row.
+        if(walker->right == NULL) {
+            if(walker->top != NULL) {
+                if(walker->bottom != NULL) {
+                    walker->top->bottom = walker->bottom;
+                    walker->bottom->top = walker->top;
+                }
+                else {
+                    walker->top->bottom = NULL;
+                    if(walker->top != NULL) {
+                        walker->top->bottom = NULL;
+                    }
+                }
+            }
+            if(walker->left != NULL) {
+                walker->left->right = NULL;
+            }
+
+            // Jumps the while loop below, since there's nothing else to do.
+            i = columns;
         }
-        if (walker->left != NULL) {
-            walker->left->right = walker->right;
+
+
+        // If the first node will be removed, the Matrix pointer also needs
+        // to be rearranged.
+        if(*m == walker) {
+            if((*m)->right != NULL) {
+                // The first element will be the one in the next column, 
+                // if there are any.
+                *m = (*m)->right;
+            }
+            else {
+                // The first element will be the next head, if there are any.
+                *m = (*m)->bottom;
+            }
         }
-        if (walker->right != NULL) {
-            walker->right->left = walker->left;
+
+        // Rearranges the pointers of nodes close to the one to be removed.
+        // It works like this: starting from the last column of row x, 
+        // move the pointer next to the left position until the pointer is null.
+        // until the pointer next not null.
+        while(i < columns && next != NULL) {
+            tmp = next->left;
+
+            next->top = tmp->top;
+            next->bottom = tmp->bottom;
+
+            if(tmp->top != NULL) {
+                tmp->top->bottom = next;
+            }
+            if(tmp->bottom != NULL) {
+                tmp->bottom->top = next;
+            }
+            if(tmp == walker) {
+                next->left = tmp->left;
+
+                if(tmp->left != NULL) {
+                    tmp->left->right = next;
+                }
+            }
+
+            next->pos_y--;
+
+            next = next->left;
+
+            i++;
         }
+
         free(walker);
     }
 
@@ -378,6 +451,7 @@ int matrix_print(Matrix m) {
 
     while (HEAD != NULL) {
         m = HEAD;
+
         while (m != NULL) {
             printf(" -- [%d (%d,%d)]", m->value, m->pos_x, m->pos_y);
 
