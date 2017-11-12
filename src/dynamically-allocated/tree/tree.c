@@ -218,14 +218,43 @@ btree_free(BinaryTree *root) {
 
 
 void
-dfs(BinaryTree *root) {
+postorder(BinaryTree *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    postorder(&((*root)->left));
+    postorder(&((*root)->right));
+    printf("%d\n", (*root)->data);
+}
+
+
+void
+preorder(BinaryTree *root, int n) {
     if (root == NULL) {
         return;
     }
 
     if (*root != NULL) {
+        printf("|");
+
+        for (int i = 0; i < n; i++) {
+            printf("_");
+        }
+
         printf("%d\n", (*root)->data);
-        dfs(&((*root)->left));
-        dfs(&((*root)->right));
+        preorder(&((*root)->left), n+1);
+        preorder(&((*root)->right), n+1);
     }
+}
+
+void
+inorder(BinaryTree *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    inorder(&((*root)->left));
+    printf("%d\n", (*root)->data);
+    inorder(&((*root)->right));
 }

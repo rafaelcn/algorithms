@@ -71,6 +71,7 @@ int btree_node_count(BinaryTree *, int acc);
  * @brief
  * @param BinaryTree * The root of the binary tree.
  * @param int The value stored by the given node.
+
  * @returns A number representing if the value was found or not, true (1) if it
  * has found a value and false otherwise.
  */
@@ -78,6 +79,24 @@ int btree_node_exists(BinaryTree *, int);
 
 /// Visualization tree algorightms
 
-void dfs(BinaryTree *root);
+/**
+ * @brief Prints the element in the order left, right, self.
+ * @param BinaryTree the root of the BinaryTree.
+ */
+void postorder(BinaryTree *);
+
+/**
+ * @brief Prints the element in the order self, left, right.
+ * @param BinaryTree the root of the BinaryTree.
+ * @param int The level of the value that is being printed.
+ */
+void preorder(BinaryTree *, int);
+
+/**
+ * @brief Prints the element in the order left, self, right.
+ * @param BinaryTree the root of the BinaryTree.
+ */
+void inorder(BinaryTree *);
+
 
 #endif // TREE_H
