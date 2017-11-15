@@ -4,8 +4,11 @@ project ("Branch Filesystem")
 option(DEBUG "Builds BFS in debug mode (-g -O0)" off)
 
 # Compile flags
-set(C_FLAGS "-Wall -Werror -pedantic -std=c99 -O3")
-set(C_FLAGS_DEBUG "-Wall -Werror -pedantic -std=c99 -g -O0")
+set(C_FLAGS "-Wall -pedantic -std=c99 -O3")
+set(C_FLAGS_DEBUG "-Wall -pedantic -std=c99 -g -O0 -DBFS_DEBUG")
+
+# Build directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 if (DEBUG)
   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS_DEBUG}")
@@ -29,7 +32,7 @@ endif()
 
 set (SRC main.c
   cmdline.c
-  fpaser.c
+  fparser.c
   bfs_string.c
   bfs_node.c
   bfs_tree.c
