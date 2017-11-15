@@ -27,30 +27,34 @@
 
 #include "cmdline.h"
 #include "bfs.h"
+#include "bfs_string.h"
 
 int main(int argc, char **argv) {
 
     FILE *fs = NULL;
 
-    // Read another virtual fs to load in.
     if (argc > 1) {
         char *fn = argv[1];
 
-        if () {
-
+        if (bfs_strncmpl(fn, ".txt", 3) == 1) {
+            fprintf(stderr, "VFS describe file has to have a .txt extension");
+            return 1;
         }
+
+        fs = fopen(fn, "r");
     } else {
         fs = fopen("fs.txt", "r");
     }
 
     if (fs == NULL) {
-        // abort!
+        return 1;
     }
+
+    bfs_init();
 
     // Load filesystem into memory.
     // Current layout of the filesystem is still being discussed.
     bfs_load(fs);
-
 
     cmdline_start();
 

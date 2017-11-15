@@ -25,5 +25,5 @@
 
 
 struct bfs_node {
-
+    char name[100];
 };

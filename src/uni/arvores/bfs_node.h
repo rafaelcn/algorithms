@@ -21,20 +21,7 @@
  *
  */
 
-#include "bfs.h"
+#ifndef BFS_NODE_H
+#define BFS_NODE_H
 
-/**
- *
- */
-struct bfs {
-    FILE* fs;
-
-};
-
-void bfs_init() {
-    // inits the BFS and its bfs_node_tree.
-}
-
-void bfs_load(FILE* virtual_filesystem) {
-
-}
+#endif // BFS_NODE_H

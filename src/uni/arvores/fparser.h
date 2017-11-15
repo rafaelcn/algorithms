@@ -24,4 +24,8 @@
 #ifndef FPARSER_H
 #define FPARSER_H
 
+#include <stdio.h>
+
+int fparse(FILE* file);
+
 #endif // FPARSER_H
