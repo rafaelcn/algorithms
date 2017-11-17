@@ -31,12 +31,19 @@ elseif (UNIX)
 endif()
 
 set (SRC main.c
+  macros.h
   cmdline.c
+  cmdline.h
   fparser.c
+  fparser.h
   bfs_string.c
+  bfs_string.h
   bfs_node.c
+  bfs_node.h
   bfs_tree.c
+  bfs_tree.h
   bfs.c
+  bfs.h
   )
 
 add_executable(${EXEC_NAME} ${SRC})
