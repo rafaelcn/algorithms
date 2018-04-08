@@ -17,14 +17,20 @@ requests are welcome.
 - [x] Stack
 - [x] Queue
 - [x] Circular Queue
-- [] Linked List
-- [] Double Linked List
+- [ ] Linked List
+- [ ] Double Linked List
 - [x] Binary Search Trees
-- [] AVL Trees
+- [ ] AVL Trees
 
 ## Sort algorithms
 
-None, yet.
+- [ ] Bubble Sort
+- [ ] Selection Sort
+- [ ] Insertion Sort
+- [ ] Shell Sort
+- [ ] Quick Sort
+- [ ] Heap Sort
+- [ ] Merge Sort
 
 ###  One more thing
 
