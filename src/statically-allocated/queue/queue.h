@@ -5,20 +5,20 @@
 
 typedef struct queue_ Queue;
 
-/**
- *
- */
+typedef int Type;
+
 Queue *queue_init();
 
-int queue_push(Queue *, int);
-int queue_pop(Queue *);
+Type queue_push(Queue *, Type);
+Type queue_pop(Queue *);
+Type queue_top(Queue *);
 
-int queue_empty(Queue *);
-int queue_full(Queue *);
+Type queue_empty(Queue *);
+Type queue_full(Queue *);
 
 void queue_free(Queue *);
 
-int check_pointer(void *);
+Type check_pointer(void *);
 
 
 #endif // QUEUE_H

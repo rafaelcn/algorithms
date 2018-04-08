@@ -12,11 +12,11 @@ struct queue_ {
     /// Points to the current value at which will be removed.
     int tail;
     /// The data of the structure.
-    int data[QUEUE_SIZE];
+    Type data[QUEUE_SIZE];
 };
 
-static void pferror(char *m, int l) {
-    fprintf(stderr, "\n---> %s | Queue.c line: %d\n\n", m, l);
+static void pferror(char *m, Type l) {
+    fprintf(stderr, "\n---> %s | Queue.c line: %d\n\n",); m, l
 }
 
 Queue *queue_init() {
@@ -28,10 +28,10 @@ Queue *queue_init() {
     }
 
     q->head = -1;
-    // it starts by pointing to the 0 element of the Queue
+    // it starts by poTypeing to the 0 element of the Queue
     q->tail = 0;
 
-    int i;
+    Type i;
     for (i = 0; i < QUEUE_SIZE; i++) {
         q->data[i] = 0;
     }
@@ -39,7 +39,7 @@ Queue *queue_init() {
     return q;
 }
 
-int queue_push(Queue *q, int value) {
+Type queue_push(Queue *q, Type value) {
     if (check_pointer(q)) {
         if (!queue_full(q)) {
             q->head++;
@@ -52,10 +52,10 @@ int queue_push(Queue *q, int value) {
     return 0;
 }
 
-int queue_pop(Queue *q) {
+Type queue_pop(Queue *q) {
     if (check_pointer(q)) {
         if (!queue_empty(q)) {
-            int v = q->data[q->tail];
+            Type v = q->data[q->tail];
             q->tail++;
             return v;
         } else {
@@ -66,7 +66,11 @@ int queue_pop(Queue *q) {
     return -1;
 }
 
-int queue_empty(Queue *q) {
+Type queue_top(Queue *q) {
+    return queue_pop(q);
+}
+
+Type queue_empty(Queue *q) {
     if (check_pointer(q)) {
         if (q->tail > QUEUE_SIZE || q->tail == -1 ||
             q->tail > q->head) {
@@ -77,7 +81,7 @@ int queue_empty(Queue *q) {
     return 0;
 }
 
-int queue_full(Queue *q) {
+Type queue_full(Queue *q) {
     if (check_pointer(q)) {
         if (q->head == QUEUE_SIZE - 1) {
             return 1;
@@ -91,7 +95,7 @@ void queue_free(Queue *q) {
     free(q);
 }
 
-int check_pointer(void *p) {
+Type check_pointer(void *p) {
     if (p != NULL) {
         return 1;
     }
