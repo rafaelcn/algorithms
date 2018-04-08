@@ -33,6 +33,11 @@ Value queue_pop(CircularQueue*);
 /**
  * @brief
  */
+Value queue_top(CircularQueue*);
+
+/**
+ * @brief
+ */
 int queue_empty(CircularQueue*);
 
 /**
@@ -44,6 +49,11 @@ int queue_full(CircularQueue*);
  * @brief
  */
 int queue_size(CircularQueue*);
+
+/**
+ *
+ */
+void queue_free(CircularQueue*);
 
 /**
  * @brief

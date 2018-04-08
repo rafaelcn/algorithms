@@ -64,6 +64,10 @@ Value queue_pop(CircularQueue* cq) {
     return v;
 }
 
+Value queue_top(CircularQueue *cq) {
+    return queue_pop(cq);
+}
+
 int queue_empty(CircularQueue *cq) {
     // not sure if entirely complete/correct
     return queue_size(cq) == 0;
@@ -75,6 +79,10 @@ int queue_full(CircularQueue *cq) {
 
 int queue_size(CircularQueue *cq) {
     return (CQUEUE_SIZE - cq->head + cq->tail) % CQUEUE_SIZE;
+}
+
+void queue_free(CircularQueue *cq) {
+    free(cq);
 }
 
 int check_pointer(void *p) {
