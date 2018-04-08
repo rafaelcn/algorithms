@@ -1,3 +1,0 @@
-[submodule "src/uni/bfs"]
-	path = src/uni/bfs
-	url = git@github.com:rafaelcn/bfs.git
