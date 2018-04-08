@@ -10,19 +10,19 @@ requests are welcome.
 
 ![Works on my machine](https://cdn.rawgit.com/nikku/works-on-my-machine/v0.2.0/badge.svg)
 
-List of Algorithms
+## List of Algorithms
 
-* Data structures
+### Data structures
 
-- Stack
-- Queue
-- Circular Queue
-- Linked List
-- Double Linked List
-- Binary Search Trees
-- AVL Trees
+- [x] Stack
+- [x] Queue
+- [x] Circular Queue
+- [] Linked List
+- [] Double Linked List
+- [x] Binary Search Trees
+- [] AVL Trees
 
-* Algorithms
+## Sort algorithms
 
 None, yet.
 
