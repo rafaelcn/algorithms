@@ -29,7 +29,7 @@ they have not been tested with large instances, you've been warned.
 
 - [x] Bubble Sort
 - [x] Selection Sort
-- [ ] Insertion Sort
+- [x] Insertion Sort
 - [ ] Shell Sort
 - [ ] Quick Sort
 - [ ] Heap Sort
