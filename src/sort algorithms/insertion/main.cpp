@@ -18,4 +18,31 @@
  * SOFTWARE.
  */
 
+#include <vector>
+
 #include "insertion.h"
+
+int main() {
+
+    std::vector<int> instance = {9, 3, 1, 4, 5, 10, 2, 8, 6, 7};
+
+    std::cout << "Unsorted instance: ";
+
+    for (auto e : instance) {
+        std::cout << e << " ";
+    }
+    std::cout << "\n";
+
+    insertion(instance);
+
+    std::cout << "Sorted instance:   ";
+
+    for (auto e : instance) {
+        std::cout << e << " ";
+    }
+    std::cout << "\n";
+
+
+
+    return 0;
+}

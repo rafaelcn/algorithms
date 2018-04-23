@@ -18,4 +18,27 @@
  * SOFTWARE.
  */
 
-#include "insertion.h"
+#ifndef INSERTION_H
+#define INSERTION_H
+
+#include <iostream>
+#include <vector>
+
+template <typename T>
+void insertion(std::vector<T> &instance) {
+
+    for (size_t i = 1; i < instance.size(); i++) {
+        T aux = instance[i];
+        size_t j = i-1;
+
+
+        while (j >= 0 && instance[j] > aux) {
+            instance[j+1] = instance[j];
+            j--;
+        }
+
+        instance[j+1] = aux;
+    }
+}
+
+#endif // INSERTION_H
