@@ -1,4 +1,4 @@
-* Algorithms
+# Algorithms
 
 In this repository there are algorithms going from data structures to sort
 algorithms which are somewhat related, as they, both, act as technology
@@ -13,9 +13,9 @@ they have not been tested with large instances, you've been warned.
 
 ![Works on my machine](https://cdn.rawgit.com/nikku/works-on-my-machine/v0.2.0/badge.svg)
 
-** List of Algorithms
+## List of Algorithms
 
-*** Data structures
+### Data structures
 
 - [x] Stack
 - [x] Queue
@@ -25,7 +25,7 @@ they have not been tested with large instances, you've been warned.
 - [x] Binary Search Trees
 - [ ] AVL Trees
 
-*** Sort algorithms
+## Sort algorithms
 
 - [x] Bubble Sort
 - [x] Selection Sort
@@ -35,12 +35,12 @@ they have not been tested with large instances, you've been warned.
 - [ ] Heap Sort
 - [ ] Merge Sort
 
-** Search Algorithms
+## Search Algorithms
 
 - [ ] Linear Search
 - [ ] Binary Search
 
-***  One more thing
+###  One more thing
 
 There are other structures that were implemented as University
 homework, you can find them in the `src/data structures/uni/` folder.
