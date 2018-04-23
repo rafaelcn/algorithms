@@ -18,4 +18,28 @@
  * SOFTWARE.
  */
 
+#include <iostream>
+#include <vector>
+
 #include "selection.h"
+
+int main() {
+
+    std::vector<int> instance = {9, 3, 1, 4, 5, 10, 2, 8, 6, 7};
+
+    std::cout << "Unsorted instance: \t";
+    for (const auto e: instance) {
+        std::cout << e << " ";
+    }
+    std::cout << "\n";
+
+    selection_sort(instance);
+
+    std::cout << "Sorted instance: \t";
+    for (const auto e: instance) {
+        std::cout << e << " ";
+    }
+    std::cout << "\n";
+
+    return 0;
+}

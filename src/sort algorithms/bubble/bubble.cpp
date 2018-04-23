@@ -18,41 +18,4 @@
  * SOFTWARE.
  */
 
-#include <iostream>
-#include <vector>
-
-template <typename T>
-void bubble_sort(std::vector<T> &);
-
-int main() {
-
-    std::vector<int> instance = {9, 3, 1, 4, 5, 10, 2, 8, 6, 7};
-
-    std::cout << "Unsorted instance: \t";
-    for (const auto e: instance) {
-        std::cout << e << " ";
-    }
-    std::cout << "\n";
-
-    bubble_sort(instance);
-
-    std::cout << "Sorted instance: \t";
-    for (const auto e: instance) {
-        std::cout << e << " ";
-    }
-    std::cout << "\n";
-
-    return 0;
-}
-
-template <typename T>
-void bubble_sort(std::vector<T> &instance) {
-
-    for (size_t i = 0; i < instance.size(); i++) {
-        for (size_t j = 1; j < instance.size(); j++) {
-            if (instance[j] < instance[j-1]) {
-                std::swap(instance[j], instance[j-1]);
-            }
-        }
-    }
-}
+#include "bubble.h"

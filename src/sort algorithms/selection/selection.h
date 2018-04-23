@@ -18,4 +18,27 @@
  * SOFTWARE.
  */
 
-#include "selection.h"
+#ifndef SELECTION_H
+#define SELECTION_H
+
+#include <vector>
+
+template <typename T>
+void selection_sort(std::vector<T> &instance) {
+
+    T min;
+
+    for (std::size_t i = 0; i < instance.size()-1; i++) {
+        min = i;
+
+        for (std::size_t j = i+1; j < instance.size(); j++) {
+            if (instance[min] > instance[j]) {
+                min = j;
+            }
+        }
+
+        std::swap(instance[min], instance[i]);
+    }
+}
+
+#endif // SELECTION_H
