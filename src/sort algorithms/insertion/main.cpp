@@ -18,6 +18,7 @@
  * SOFTWARE.
  */
 
+#include <iostream>
 #include <vector>
 
 #include "insertion.h"
@@ -41,8 +42,6 @@ int main() {
         std::cout << e << " ";
     }
     std::cout << "\n";
-
-
 
     return 0;
 }
