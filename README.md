@@ -30,7 +30,7 @@ they have not been tested with large instances, you've been warned.
 - [x] Bubble Sort
 - [x] Selection Sort
 - [x] Insertion Sort
-- [ ] Shell Sort
+- [x] Shell Sort
 - [ ] Quick Sort
 - [ ] Heap Sort
 - [ ] Merge Sort
