@@ -43,4 +43,4 @@ they have not been tested with large instances, you've been warned.
 ###  One more thing
 
 There are other structures that were implemented as University
-homework, you can find them in the `src/data structures/uni/` folder.
+homework, you can find them under any src folder called as `uni`.
