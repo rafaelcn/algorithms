@@ -33,7 +33,7 @@ they have not been tested with large instances, you've been warned.
 - [x] Shell Sort
 - [ ] Quick Sort
 - [ ] Heap Sort
-- [ ] Merge Sort
+- [x] Merge Sort
 
 ## Search Algorithms
 
