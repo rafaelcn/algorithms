@@ -1,5 +1,6 @@
 # Compiled files
 *.out
+*.o
 
 # Vim files
 *.swp
