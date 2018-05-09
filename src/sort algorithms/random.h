@@ -27,20 +27,13 @@ class Random {
 public:
     ~Random() {}
 
+    static int get();
     static int get(int a, int b);
 private:
     Random() {}
 
     static std::random_device m_random_device;
 };
-
-template <typename int>
-int Random::get(int a, int b) {
-    std::mt19937 generator(m_random_device());
-    std::uniform_int_distribution<> distribution(a, b);
-
-    return distribution(generator);
-}
 
 
 #endif // RANDOM_H
