@@ -31,7 +31,7 @@ they have not been tested with large instances, you've been warned.
 - [x] Selection Sort
 - [x] Insertion Sort
 - [x] Shell Sort
-- [ ] Quick Sort
+- [x] Quick Sort
 - [ ] Heap Sort
 - [x] Merge Sort
 
