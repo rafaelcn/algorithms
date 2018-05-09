@@ -43,17 +43,20 @@ void heapify(std::vector<int> &v, int n, int i) {
     }
 }
 
-void heap(std::vector<int> &v, int n) {
+void heap(std::vector<int> &v) {
 
-    // build heap
+    int n = v.size();
+
+    // build heap in O(log n).
     for (int i = n/2-1; i >= 0; i--) {
         heapify(v, n, i);
     }
 
-    // sort
+    // sort in O(n) time.
     for (int i = n - 1; i >= 0; i--) {
         std::swap(v[0], v[i]);
         // update the heap every time you change the original instance
+        // as the swap broke the heap property.
         heapify(v, i, 0);
     }
 }

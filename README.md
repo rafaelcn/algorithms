@@ -32,7 +32,7 @@ they have not been tested with large instances, you've been warned.
 - [x] Insertion Sort
 - [x] Shell Sort
 - [x] Quick Sort
-- [ ] Heap Sort
+- [x] Heap Sort
 - [x] Merge Sort
 
 ## Search Algorithms

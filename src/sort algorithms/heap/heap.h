@@ -24,6 +24,6 @@
 #include <vector>
 
 void heapify(std::vector<int>&, int n, int i);
-void heap(std::vector<int>&, int n);
+void heap(std::vector<int>&);
 
 #endif // HEAP_H

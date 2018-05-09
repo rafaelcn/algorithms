@@ -43,7 +43,7 @@ int main() {
     }
     std::cout << "\n";
 
-    heap(instance, instance.size());
+    heap(instance);
 
     for (i = 0; i < instance.size(); i++) {
         std::cout << instance[i] << " ";
