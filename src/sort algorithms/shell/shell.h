@@ -36,9 +36,8 @@ void shell(std::vector<T> &v) {
     while (gap > 1) {
         gap /= 3;
 
-        for (i = 1; i < v.size(); i++) {
+        for (i = gap; i < v.size(); i++) {
             T aux = v[i];
-
             j = i;
 
             while (j >= gap && aux < v[j-gap]) {
@@ -50,6 +49,7 @@ void shell(std::vector<T> &v) {
         }
     }
 }
+
 
 
 #endif // SHELL_H
