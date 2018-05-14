@@ -1,26 +1,14 @@
 package main
 
 import (
-	"math/rand"
 	"sort"
 	"testing"
-	"time"
 )
-
-func fill(vector []int, length int) {
-
-	rand.Seed(time.Now().UnixNano())
-
-	for i := 0; i < length; i++ {
-		// might be biased
-		vector[i] = rand.Intn(100)
-	}
-}
 
 func TestBubble(t *testing.T) {
 
 	raw := make([]int, 1000)
-	fill(raw, len(raw))
+	Fill(raw, len(raw))
 
 	withSort := make([]int, len(raw))
 	withBubble := make([]int, len(raw))
@@ -28,7 +16,7 @@ func TestBubble(t *testing.T) {
 	copy(withSort, raw)
 	copy(withBubble, raw)
 
-	Bubble(withBubble)
+	withBubble = Bubble(withBubble)
 
 	sort.Slice(withSort, func(i, j int) bool {
 		return withSort[i] < withSort[j]
