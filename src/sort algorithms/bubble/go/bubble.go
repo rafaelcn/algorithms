@@ -30,6 +30,7 @@ func Bubble(instance []int) []int {
 }
 
 func main() {
+
 	var instance [100]int
 
 	rand.Seed(time.Now().UnixNano())

@@ -13,7 +13,7 @@ func fill(vector []int, length int) {
 
 	for i := 0; i < length; i++ {
 		// might be biased
-		vector[i] = rand.Int() % 100
+		vector[i] = rand.Intn(100)
 	}
 }
 
