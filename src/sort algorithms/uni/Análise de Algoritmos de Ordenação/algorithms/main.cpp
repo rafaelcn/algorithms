@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
                           << "ms\n";
 
                 data.first = stop_point;
-                             data.second = time_avg.count()/10.0;
+                data.second = time_avg.count()/10.0;
                 filename += ".csv";
 
                 write_csv(filename, data);
