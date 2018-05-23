@@ -8,7 +8,7 @@ import (
 func TestBubble(t *testing.T) {
 
 	raw := make([]int, 1000)
-	Fill(raw, len(raw))
+	Fill(raw)
 
 	withSort := make([]int, len(raw))
 	withSelection := make([]int, len(raw))

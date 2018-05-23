@@ -6,12 +6,12 @@ import (
 	"time"
 )
 
-func Fill(vector []int, length int) {
+func Fill(vector []int) {
 
 	rand.Seed(time.Now().UnixNano())
 
-	for i := 0; i < length; i++ {
-		vector[i] = rand.Intn(100)
+	for i := 0; i < len(vector); i++ {
+		vector[i] = rand.Intn(len(vector))
 	}
 }
 
@@ -39,7 +39,7 @@ func Selection(instance []int) []int {
 func main() {
 
 	instance := make([]int, 20)
-	Fill(instance, len(instance))
+	Fill(instance)
 
 	fmt.Println(instance)
 

@@ -38,11 +38,11 @@ func InsertionSort(instance []int) []int {
 func main() {
 
 	var instance = make([]int, 10)
-	Fill(instance[:])
+	Fill(instance)
 
 	fmt.Println(instance)
 
-	sorted := InsertionSort(instance[:])
+	sorted := InsertionSort(instance)
 
 	fmt.Println(sorted)
 }

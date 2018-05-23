@@ -43,12 +43,12 @@ func Bubble(instance []int) []int {
 
 func main() {
 
-	var instance [20]int
-	Fill(instance[:])
+	instance := make([]int, 20)
+	Fill(instance)
 
 	fmt.Println(instance)
 
-	sorted := Bubble(instance[:])
+	sorted := Bubble(instance)
 
 	fmt.Println(sorted)
 }
