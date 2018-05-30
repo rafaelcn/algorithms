@@ -1,0 +1,31 @@
+#+AUTHOR: Rafael Campos Nunes
+
+* Brief theory
+
+External sort is a method of sorting data that cannot be loaded in its entirely
+on the primary memory, that is, the data is too big to fit on the primary
+memory. Methods to sort this kind of data are very different from the methods
+found in internal sort and there are three main factors that differs from
+internal sort. To understand them they are described in the following sections.
+
+** Cost to look
+
+Although the entirely of the data won't be load on the primary memory some of
+that data will and it has a great cost to do so as the hard drive is several
+orders of magnitude slower than the RAM. That's the *main cost* of external
+sorting.
+
+** Restrictions
+
+There are several restrictions concerning how the data is accessed. *Magnetic
+tape's* data can only be accessed in a sequencial way. Data stored in *magnetic
+disks* can be accessed directly but with a greater cost to access the data
+sequentially, creating a restriction to the use of direct access.
+
+** Technology
+
+The development of methods of external sorting is very dependent of the
+current technology. There is lots of external memory units, making it
+difficult to establish fixed parameters to compare the complexity of these
+algorithms. Furthermore, because of this unfixed parameters the same sorting
+method may vary in time and memory complexity.
