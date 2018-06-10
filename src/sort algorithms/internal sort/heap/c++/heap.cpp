@@ -47,12 +47,12 @@ void heap(std::vector<int> &v) {
 
     int n = v.size();
 
-    // build heap in O(log n).
+    // build heap in O(n).
     for (int i = n/2-1; i >= 0; i--) {
         heapify(v, n, i);
     }
 
-    // sort in O(n) time.
+    // sort in O(log n) time.
     for (int i = n - 1; i >= 0; i--) {
         std::swap(v[0], v[i]);
         // update the heap every time you change the original instance
