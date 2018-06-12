@@ -37,7 +37,7 @@ they have not been tested with large instances, you've been warned.
 
 ## Search Algorithms
 
-- [ ] Linear Search
+- [x] Linear Search
 - [ ] Binary Search
 
 ###  One more thing
