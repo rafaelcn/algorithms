@@ -34,9 +34,10 @@ typedef struct node Node;
 
 List *list_init(int);
 
+List *list_push(List *, int);
+List *list_remove(List *, int);
+Node *list_pop(List *);
 
 void list_free(List *);
-
-int is_null(void *)
 
 #endif // LINKED_LIST_H

@@ -20,7 +20,7 @@ they have not been tested with large instances, you've been warned.
 - [x] Stack
 - [x] Queue
 - [x] Circular Queue
-- [ ] Linked List
+- [x] Linked List
 - [ ] Double Linked List
 - [x] Binary Search Trees
 - [ ] AVL Trees
