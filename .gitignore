@@ -12,3 +12,6 @@ doxyfile
 *.rar
 *.zip
 *.tar
+
+# Tex files
+*.tex
