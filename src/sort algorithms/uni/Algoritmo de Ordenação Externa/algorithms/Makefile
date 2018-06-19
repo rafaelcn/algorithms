@@ -20,9 +20,8 @@ mine:
 prof:
 	$(CC) $(DFLAGS) prof.c file.c -o prof.out
 
-
 heap:
-	$(CC) $(FLAGS) heap.c heap_test.c -o heap_test.out
+	$(CC) $(DFLAGS) heap.c heap_test.c -o heap_test.out
 
 clear:
 	rm  data/*
