@@ -11,19 +11,52 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-typedef heap_element HeapElement;
+#include <stdint.h>
+
+struct heap_element {
+    int key;
+    int weight;
+};
+
+struct priority_queue {
+    // The vector that holds the heap inside the structure
+    struct heap_element *vector;
+
+    // uint16_t = 2^16 not signalized.
+
+    // The current index of the heap
+    uint16_t index;
+    // The current size of the heap
+    uint16_t size;
+
+    // Mostly of the time the size == index but we may modify the index as
+    // needed to fill and remove elements, that will be a more reliable
+    // source of information.
+};
+
+typedef struct priority_queue Heap;
+typedef struct heap_element HeapElement;
 
 /**
  * @brief Creates a heap from an integer pointer and sorts the vector
  * underlying that pointer.
  */
-void heap(int *, int);
+void heap(Heap *);
 /**
  * @brief Creates a heap data structure from an integer pointer but it doesn't
  * sorts it.
  */
-void heapify(int *, int, int);
+void heapify(HeapElement *, int, int);
 
-
+/**
+ * @brief Takes a Heap as input and creates a new HeapElement inserting it on
+ * the Heap and sorting the entire Heap
+ */
+void sift_up(Heap *, int, int);
+/**
+ * @brief Returns the first element of the Heap - a HeapElement - rebuilding
+ * the heap soon after that.
+ */
+HeapElement sift_down(Heap *, int, int);
 
 #endif // HEAP_H
