@@ -23,7 +23,7 @@ int main(void) {
     h->size = 0;
 
     sift_up(h, 2, 0);
-    sift_up(h, 3, 0);
+    sift_up(h, 3, 3);
     sift_up(h, 5, 0);
     sift_up(h, 3, 2);
     sift_up(h, 6, 1);

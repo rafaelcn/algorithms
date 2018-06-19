@@ -4,7 +4,6 @@ DFLAGS=$(FLAGS) -g -Og
 SRC=external_merge.c file.c heap.c
 
 EXEC=external_merge.out
-EXEC_P=prof.out
 
 ifeq ($(OS), Windows_NT)
 	EXEC=external_merge.exe
@@ -12,13 +11,9 @@ endif
 
 all:
 	$(CC) $(DFLAGS) $(SRC) -o $(EXEC)
-	$(CC) $(DFLAGS) prof.c file.c -o prof.out
 
 mine:
 	$(CC) $(DFLAGS) $(SRC) -o $(EXEC)
-
-prof:
-	$(CC) $(DFLAGS) prof.c file.c -o prof.out
 
 heap:
 	$(CC) $(DFLAGS) heap.c heap_test.c -o heap_test.out

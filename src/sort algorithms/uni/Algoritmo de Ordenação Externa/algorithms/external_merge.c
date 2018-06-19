@@ -121,49 +121,76 @@ int search_lower(File* arq, int files_num, int K, int* menor) {
     }
 }
 
+
 void merge(char* name, int files, int K) {
     //
-    char novo[20];
+    char tmp_file_name[20];
     //
     int i;
     //
-    int *buffer = (int*) malloc(K * sizeof(int));
-    //
-    File* arq = (File*) malloc(files * sizeof(File));
+    File* file = (File*) malloc(files * sizeof(File));
 
     for (i = 0; i < files; i++) {
-        sprintf(novo, "data/temp%d.txt", i+1);
-        arq[i].f = fopen(novo, "r");
-        arq[i].MAX = 0;
-        arq[i].pos = 0;
-        arq[i].buffer = (int*) malloc(K * sizeof(int));
-        file_fill(&arq[i], K);
+        sprintf(tmp_file_name, "data/temp%d.txt", i+1);
+        file[i].f = fopen(tmp_file_name, "r");
+        file[i].MAX = 0;
+        file[i].pos = 0;
+        file[i].buffer = (int*) malloc(K * sizeof(int));
+        file_fill(&file[i], K);
     }
 
-    // There are, still, files to process
-    int menor;
-    int quantBuffer = 0;
+    // While there are files to process
+    int smaller;
+    int status;
+    int heapSize = 0;
+    int weight = 0;
 
-    while (search_lower(arq, files, K, &menor) == 1) {
-        buffer[quantBuffer] = menor;
-        quantBuffer++;
-        if(quantBuffer == K){
-            file_save(name, buffer, K, 1);
-            quantBuffer = 0;
+    Heap *h = malloc(sizeof(Heap));
+    h->vector = calloc(M, sizeof(HeapElement));
+
+    do {
+        status = search_lower(file, files, K, &smaller);
+
+        if(heapSize == K){
+            heapSize--;
+
+            if(status == 1) {
+                HeapElement he = sift_down(h);
+
+                if(smaller < he.key) {
+                    weight++;
+                }
+
+                sift_up_i(h, smaller, weight, 0);
+
+                file_save_number(name, he.key, 0);
+            }
         }
-    }
+        else {
+            // If there are data to be written
+            if(status == 1) {
+                sift_up(h, smaller, weight);
+                heapSize++;
+            }
+        }
+    } while(status == 1);
 
-    // If there is still a buffer left
-    if (quantBuffer != 0) {
-        file_save(name, buffer, quantBuffer, 1);
+    // Save the data of the heap
+    while (heapSize != 0) {
+        HeapElement he = sift_down(h);
+        int nl = 0;
+        if(heapSize == 1) {
+            nl = 1;
+        }
+        file_save_number(name, he.key, nl);
+        heapSize--;
     }
 
     for (i = 0; i < files; i++) {
-        free(arq[i].buffer);
+        free(file[i].buffer);
     }
 
-    free(arq);
-    free(buffer);
+    free(file);
 }
 
 void external_mergesort(char *name) {
