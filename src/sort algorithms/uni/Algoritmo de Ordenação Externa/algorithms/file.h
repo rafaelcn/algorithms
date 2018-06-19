@@ -37,6 +37,8 @@ void file_create_random(char *, int);
  * @param k :
  */
 void file_save(char *, int[], int, int);
+
+void file_save_number(char *, int, int);
 /**
  * @param name: The name of the file
  * @param v : the data vector

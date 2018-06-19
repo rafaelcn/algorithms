@@ -60,6 +60,19 @@ void file_save(char *name, int *v, int n, int nl) {
     fclose(f);
 }
 
+void file_save_number(char *name, int key, int nl) {
+
+    FILE *f = fopen(name, "a");
+
+    if (nl == 0) {
+        fprintf(f, "%d", key);
+    } else {
+        fprintf(f, "%d\n", key);
+    }
+
+    fclose(f);
+}
+
 bool file_is_sorted(char *name) {
 
     FILE* f = fopen(name, "r");
