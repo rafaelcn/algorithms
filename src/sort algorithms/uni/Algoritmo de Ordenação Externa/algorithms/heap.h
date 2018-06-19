@@ -38,25 +38,35 @@ typedef struct priority_queue Heap;
 typedef struct heap_element HeapElement;
 
 /**
+ * @brief Creates a new priority queue and returns it to the caller with the
+ * initialized data.
+ */
+Heap *heap_make(int);
+/**
  * @brief Creates a heap from an integer pointer and sorts the vector
  * underlying that pointer.
  */
-void heap(Heap *);
+void heap_sort(Heap *);
 /**
  * @brief Creates a heap data structure from an integer pointer but it doesn't
  * sorts it.
  */
 void heapify(HeapElement *, int, int);
-
+/**
+ * @brief Takes a Heap as input and creates a new HeapElement inserting it
+ * index specified as its fourth parameter on the heap.
+ *
+ */
+void sift_up_i(Heap *, int, int, int);
 /**
  * @brief Takes a Heap as input and creates a new HeapElement inserting it on
  * the Heap and sorting the entire Heap
  */
 void sift_up(Heap *, int, int);
 /**
- * @brief Returns the first element of the Heap - a HeapElement - rebuilding
+ * @brief Returns the first element of the heap - a HeapElement - rebuilding
  * the heap soon after that.
  */
-HeapElement sift_down(Heap *, int, int);
+HeapElement sift_down(Heap *);
 
 #endif // HEAP_H

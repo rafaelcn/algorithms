@@ -10,6 +10,19 @@ void swap(HeapElement *a, HeapElement *b) {
     *b = tmp;
 }
 
+Heap *heap_make(int size) {
+
+    Heap *h = malloc(sizeof(Heap));
+
+    if (h == NULL) {
+        exit(1);
+    }
+
+    h->vector = calloc(size, sizeof(HeapElement));
+
+    return h;
+}
+
 void heapify(HeapElement *heap_elements, int n, int i) {
 
     int smallest = i;
@@ -49,7 +62,7 @@ void heapify(HeapElement *heap_elements, int n, int i) {
     }
 }
 
-void sift_up(Heap *heap_t, int key, int weight) {
+void sift_up_i(Heap *heap_t, int key, int weight, int index) {
 
     if (heap_t == NULL) {
         return;
@@ -60,36 +73,39 @@ void sift_up(Heap *heap_t, int key, int weight) {
     he.key = key;
     he.weight = weight;
 
-    heap_t->vector[heap_t->index] = he;
-
-    heap_t->index = heap_t->index+1;
-    heap_t->size = heap_t->index;
+    heap_t->vector[index] = he;
 
     // I know it's time consuming but I'm going with the faster way to
     // code... (frown).
 
-    heap(heap_t);
+    heap_sort(heap_t);
 }
 
-HeapElement sift_down(Heap* heap_t, int key, int weight) {
-    // This function is not entirely correct because it does more than what's
-    // intended to be done with her. It removes the first element of the heap
-    // and then inserts another on the same place and calls heapify after that.
+void sift_up(Heap *heap_t, int key, int weight) {
+
+    if (heap_t == NULL) {
+        return;
+    }
+
+    sift_up_i(heap_t, key, weight, heap_t->index);
+
+    heap_t->index = heap_t->index+1;
+    heap_t->size = heap_t->index;
+}
+
+HeapElement sift_down(Heap* heap_t) {
 
     HeapElement e = heap_t->vector[0];
-
-    heap_t->vector[0].key = key;
-    heap_t->vector[0].weight = weight;
 
     // Again this is time consuming but I'm low on time to do this in a better
     // way. It must work.
 
-    heap(heap_t);
+    heap_sort(heap_t);
 
     return e;
 }
 
-void heap(Heap *h) {
+void heap_sort(Heap *h) {
 
     if (h == NULL) {
         return;
