@@ -29,3 +29,90 @@ current technology. There is lots of external memory units, making it
 difficult to establish fixed parameters to compare the complexity of these
 algorithms. Furthermore, because of this unfixed parameters the same sorting
 method may vary in time and memory complexity.
+
+* Basic strategy
+
+Every sort algorithm that does external sorting uses a strategy. The fundamental
+strategy to sort /e.g./ a file is to read the data, breaking it in blocks of the
+primary memory's size; then, each block is sorted in the RAM. After the sorting
+comes the intercalation phase where all the blocks of sorted data are
+intercalated creating, at each step, a bigger file containing more and more
+sorted data until the file is sorted.
+
+* Measuring complexity
+
+The approximate time complexity of an external sort algorithm is determined by
+how many reads and writes, each process considered as a step, occurs in a file
+over the process of sorting. Good sorting methods generally sort data under ten
+steps.
+
+* k-way method
+
+The k-way sorting uses the described strategy previously and also a series of
+files from which they are read and written. The k-way sort specifies /k/ ways to
+sort a file, along with the k ways there is also a limitation of how many items
+can be stored in the RAM.
+
+For instance, a 3-way sort with a RAM capable of store 3 items and the following
+file to be sorted:
+
+| B A L A N C E D I N T E R C A L A T I O N |
+
+It could be sorted loading 3 items per turn, on the memory. Sort the elements
+and write those sorted elements in a file (here called as a *magnetic tape*).
+The file now with those elements is the first /way/ of sorting. Repeating the
+process to the others tapes we get the following structure of files per elements
+
+| 1-way | ABL |
+| 2-way | ACN |
+| 3-way | DEI |
+
+As it can be seen there is nine elements as we can only load and write three
+elements per turn and we ran out of tapes to store the other characters of the
+file to be sorted. But, actually, this is not true. AS we will see we can use
+other files that refer to the same /k-way/ sorting, intercalating each *block*
+*of work* to the respective resultant file later.
+
+| Ways  | block 1 | block 2 | block 3 |
+| 1-way | ABL     | ENT     | INO     |
+| 2-way | ACN     | ACR     |         |
+| 3-way | DEI     | ALT     |         |
+
+The result is that each block has a sorted set of letters. Now, each block of
+work will intercalate its elements to a resultant tape.
+
+| Reultant tape | Content   |
+| tape 1        | AABCDEIL  |
+| tape 2        | AACELNRTT |
+| tape 3        | INO       |
+
+As a final step these three resultant tapes are intercalated one more time to
+sort the file completely.
+
+| Result              |
+| AAAABCCDEEIILLNNRTT |
+
+Finally, the file is sorted and we can see that we have used six tapes to
+complete the task. It is possible to use less tapes, using t+1 tapes (being t
+the number of tapes available to the sorting that is initially equal to /m/) one
+would have to rewrite the contents of the /nth/ tape at each block of
+intercalation.
+
+There other ways to implement k-ways intercalation sort. By using a heap, for
+instance, one could implement the initial and the middle sorting phase in
+an fashionable way. That makes blocks of work with a number that isn't fixed
+and equal to /m/.
+
+** Polyphase Intercalation
+
+This method of intercalation allow a more efficient way to use secondary memory
+as it reduces the amount of tapes used on the previous methods. As it was shown
+a balanced intercalation would use *2t* or *t+1* tapes to sort the data, but a
+polyphase intercalation eliminates the need of using an additional copy to
+intercalate (the *1* in *t+1*).
+
+Polyphase intercalation distributes the data on the sorted blocks with a heap
+in a way that their length are unequal, using *t* to do everything and leaving a
+free tape. After that the tapes are sorted to the free tape until one tape is
+free again, at this point one just need to copy the sorted tape onto the nth
+tape corresponding to its block of work.
