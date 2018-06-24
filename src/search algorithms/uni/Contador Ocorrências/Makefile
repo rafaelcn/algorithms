@@ -8,4 +8,4 @@ ifeq ($(OS), WinNT)
 endif
 
 all:
-	$(CC) $(FLAGS) $(SRC) -o $(EXEC)
+	$(CC) $(FLAGS) $(SRC) -o bin/$(EXEC)
