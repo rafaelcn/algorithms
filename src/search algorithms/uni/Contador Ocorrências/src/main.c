@@ -27,6 +27,9 @@
 #include <string.h>
 
 #include "file.h"
+#include "hash.h"
+#include "iterator.h"
+#include "linked_list.h"
 
 void usage();
 
@@ -37,11 +40,19 @@ int main(int argc, char **argv) {
         exit(0);
     }
 
+    // The name of the file to be loaded
     char *filename = argv[1];
-    char *words = file_load(filename);
+    // The list of words read by the file
+    list_t* words_list = file_split_words(filename);
+
+    iterator_t *it = iterator_new(words_list);
+    while (iterator_next(it)) {
+        // TODO: Add the word on the list to the hash table
+    }
 
     return 0;
 }
+
 
 void usage() {
 
