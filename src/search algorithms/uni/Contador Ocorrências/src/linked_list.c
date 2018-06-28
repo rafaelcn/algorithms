@@ -1,3 +1,25 @@
+/**
+ *                Universidade Tecnológica Federal do Paraná
+ *
+ * Copyright (c) 2017 Rafael Nunes <rafaelnunes@engineer.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ *
+ */
+
 #include "linked_list.h"
 
 #include <stdlib.h>
@@ -6,8 +28,9 @@
 
 struct list_s {
     char value[64];
-    struct list *next;
+    list_t *next;
 };
+
 
 list_t *list_init(char *value) {
 
@@ -18,7 +41,7 @@ list_t *list_init(char *value) {
         exit(EXIT_FAILURE);
     }
 
-    strcpy(l->value, value);
+    strcpy_s(l->value, 64, value);
     l->next = NULL;
 
     return l;
@@ -31,21 +54,23 @@ list_t *list_push(list_t *l, char *value) {
         return l;
     }
 
-    while (l->next != NULL) {
-        l = l->next;
+    list_t *tmp = l;
+
+    while (tmp->next != NULL) {
+        tmp = tmp->next;
     }
 
-    node_t *e = malloc(sizeof(node_t));
+    list_t *e = malloc(sizeof(list_t));
 
-    strcpy(e->value, value);
+    strcpy_s(e->value, 64, value);
     e->next = NULL;
 
-    l->next = e;
+    tmp->next = e;
 
     return l;
 }
 
-node_t *list_search(list_t *l, char *value) {
+const list_t *list_search(list_t *l, char *value) {
 
     if (l == NULL) {
         fprintf(stdout, "WARN: Can't find any value on an empty list.\n");
