@@ -87,3 +87,19 @@ const list_t *list_search(list_t *l, char *value) {
 
     return NULL;
 }
+
+void list_free(list_t *list) {
+
+    // element pointer
+    list_t *e = list;
+    // previous pointer
+    list_t *p;
+
+    while(e->next != NULL) {
+        p = e;
+        e = e->next;
+        free(p);
+    }
+
+    free(e);
+}
