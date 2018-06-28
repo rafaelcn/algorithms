@@ -24,13 +24,17 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "linked_list.h"
 
 // Max chars that can be read by the counter (it should be more generic later)
+// I here refer to a generic way to selecting how much data could be read by the
+// software
 #define MAX_CHARS 320E3
+// Max words that can be read by the counter
+#define MAX_WORDS 10E4
 
-char *file_load(char *filename);
+char *file_load(const char *filename);
 
+list_t* file_split_words(const char *file);
 
 #endif // FILE_H
