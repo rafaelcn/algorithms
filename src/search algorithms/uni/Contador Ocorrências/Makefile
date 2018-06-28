@@ -1,5 +1,5 @@
 CC = gcc
-FLAGS = -Wall -pedantic -Og -g -std=c99
+FLAGS = -Wall -pedantic -Og -g -std=c11
 SRC = src/*.c # I'm aware of the globbing problems
 EXEC = counter.out
 DEXEC = counter_debug.out
