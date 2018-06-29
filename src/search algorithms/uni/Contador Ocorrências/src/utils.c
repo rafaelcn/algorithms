@@ -28,7 +28,7 @@ void error(char *msg, char *file, size_t line) {
 
     char err_buf[512];
 
-    snprintf(err_buf, sizeof err_buf, "\nERR: %s. [%s:%u]\n", msg, file, line);
+    snprintf(err_buf, sizeof err_buf, "\nERR: %s. [%s:%zu]\n", msg, file, line);
 
     fprintf(stderr, err_buf);
 }
