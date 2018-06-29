@@ -61,7 +61,7 @@ static hash_cell_t* ht_new_hash_cell(const char *word)  {
         error("Allocating a new cell has failed", __FILE__, __LINE__);
     }
 
-    hash_cell->count = 0;
+    hash_cell->count = 1;
     hash_cell->word_list = list_init(word);
 
     return hash_cell;
@@ -95,8 +95,8 @@ static int ht_hash2(const char *word) {
     for (size_t i = 0; i < len; i++) {
         hash += word[i] * 137 - i;
     }
-    hash = hash % HASH_MAX_SIZE;
 
+    hash = hash % HASH_MAX_SIZE;
     return (int)hash;
 }
 
