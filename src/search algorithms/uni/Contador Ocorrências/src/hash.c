@@ -62,14 +62,14 @@ static hash_cell_t* ht_new_hash_cell(const char *word)  {
     }
 
     hash_cell->count = 0;
-    hash_cell->values = list_push(hash_cell->values, word);
+    hash_cell->word_list = list_init(word);
 
     return hash_cell;
 }
 
 static void ht_del_hash_cell(hash_cell_t *cell) {
 
-    list_free(cell->values);
+    list_free(cell->word_list);
     free(cell);
 }
 
@@ -141,8 +141,8 @@ void ht_insert(hashtable_t *ht, const char *word) {
         ht->entries[hashed] = cell;
     } else {
         ht->entries[hashed]->count++;
-        ht->entries[hashed]->values = list_push(ht->entries[hashed]->values,
-                                                word);
+        ht->entries[hashed]->word_list =
+            list_push(ht->entries[hashed]->word_list, word);
     }
 }
 

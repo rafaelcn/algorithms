@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
 
     for (int i = 0; i < HASH_MAX_SIZE; i++) {
         if (ht->entries[i] != NULL) {
-            const char *word = list_head(ht->entries[i]->values);
+            const char *word = list_head(ht->entries[i]->word_list);
 
             if (ht->entries[i]->count >= 3 && strlen(word) >= 3) {
                 printf("%s %zu\n", word, ht->entries[i]->count);

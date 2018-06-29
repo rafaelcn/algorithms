@@ -33,9 +33,10 @@
 struct hash_cell_s {
     // Number of words in the same entry (list)
     size_t count;
-    // list of values that belongs to this key hash_cell
-    list_t *values;
+    // list of words that belongs to this key hash_cell
+    list_t *word_list;
 };
+
 
 struct hashtable_s {
     // The total size of the hash table
