@@ -31,8 +31,7 @@ struct list_s {
     list_t *next;
 };
 
-
-list_t *list_init(char *value) {
+list_t *list_init(const char *value) {
 
     list_t *l = malloc(sizeof(list_t));
 
@@ -47,7 +46,7 @@ list_t *list_init(char *value) {
     return l;
 }
 
-list_t *list_push(list_t *l, char *value) {
+list_t *list_push(list_t *l, const char *value) {
 
     if (l == NULL) {
         l = list_init(value);
@@ -70,7 +69,11 @@ list_t *list_push(list_t *l, char *value) {
     return l;
 }
 
-const list_t *list_search(list_t *l, char *value) {
+const char *list_head(const list_t *l) {
+    return l->value;
+}
+
+const list_t *list_search(list_t *l, const char *value) {
 
     if (l == NULL) {
         fprintf(stdout, "WARN: Can't find any value on an empty list.\n");
