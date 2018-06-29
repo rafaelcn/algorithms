@@ -20,7 +20,6 @@
  *
  */
 
-
 #include "file.h"
 
 #include <stdio.h>
@@ -41,9 +40,7 @@ static void file_buffer_clean(char *buffer, size_t n) {
 
 char *file_load(const char *filename) {
 
-    FILE* file = NULL;
-
-    fopen_s(&file, filename, "r");
+    FILE* file = fopen(filename, "r");
 
     if (file == NULL) {
         fprintf(stderr, "File %s couldn't be read\n\n", filename);

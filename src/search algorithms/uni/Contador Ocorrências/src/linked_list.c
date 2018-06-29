@@ -40,7 +40,7 @@ list_t *list_init(const char *value) {
         exit(EXIT_FAILURE);
     }
 
-    strcpy_s(l->value, 64, value);
+    strcpy(l->value, value);
     l->next = NULL;
 
     return l;
@@ -61,7 +61,7 @@ list_t *list_push(list_t *l, const char *value) {
 
     list_t *e = malloc(sizeof(list_t));
 
-    strcpy_s(e->value, 64, value);
+    strcpy(e->value, value);
     e->next = NULL;
 
     tmp->next = e;
