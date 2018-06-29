@@ -59,7 +59,7 @@ char *file_load(const char *filename) {
     } while (!feof(file));
 
 #ifdef DEBUG
-    fprintf(stdout, "\n\nWords read: %s\n\n", words);
+    fprintf(stdout, "\nWORDS READ: %s\n\n", words);
 #endif
 
     fclose(file);
@@ -96,11 +96,13 @@ list_t *file_split_words(const char *filename) {
 #ifdef DEBUG
     iterator_t *it = iterator_new(words);
 
-    printf("\nPrinting the other version: \n");
+    printf("\nWORDS SPLIT:");
 
     while (iterator_next(it)) {
         printf("%s ", iterator_eval(it));
     }
+
+    printf("\n\n");
 
     iterator_free(it);
 #endif //DEBUG
