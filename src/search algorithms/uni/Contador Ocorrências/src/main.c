@@ -53,7 +53,9 @@ int main(int argc, char **argv) {
         ht_insert(ht, word);
     }
 
+#ifdef DEBUG
     printf("\nWORDS READ: %zu\n", iterator_size(it));
+#endif // DEBUG
 
     for (int i = 0; i < HASH_MAX_SIZE; i++) {
         if (ht->entries[i] != NULL) {
@@ -66,6 +68,7 @@ int main(int argc, char **argv) {
     }
 
     iterator_free(it);
+    list_free(words_list);
     ht_free(ht);
 
     return 0;
