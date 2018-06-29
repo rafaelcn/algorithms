@@ -1,2 +1,6 @@
 # Build folder
 bin/
+
+# Executable files from test folder
+*.exe
+*.out
