@@ -20,8 +20,6 @@
  *
  */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,6 +28,7 @@
 #include "hash.h"
 #include "iterator.h"
 #include "linked_list.h"
+#include "macros.h"
 
 void usage();
 
@@ -44,11 +43,30 @@ int main(int argc, char **argv) {
     char *filename = argv[1];
     // The list of words read by the file
     list_t* words_list = file_split_words(filename);
-
+    // Creating an iterator for the list of words
     iterator_t *it = iterator_new(words_list);
+
+    hashtable_t *ht = ht_init();
+
     while (iterator_next(it)) {
-        // TODO: Add the word on the list to the hash table
+        char *word = iterator_eval(it);
+        ht_insert(ht, word);
     }
+
+    printf("\nWORDS READ: %zu\n", iterator_size(it));
+
+    for (int i = 0; i < HASH_MAX_SIZE; i++) {
+        if (ht->entries[i] != NULL) {
+            const char *word = list_head(ht->entries[i]->values);
+
+            if (ht->entries[i]->count >= 3 && strlen(word) >= 3) {
+                printf("%s %zu\n", word, ht->entries[i]->count);
+            }
+        }
+    }
+
+    iterator_free(it);
+    ht_free(ht);
 
     return 0;
 }
