@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
             const char *word = list_head(ht->entries[i]->word_list);
 
             if (ht->entries[i]->count >= 3 && strlen(word) >= 3) {
-                printf("%s %zu\n", word, ht->entries[i]->count);
+                printf("%-15s  %zu\n", word, ht->entries[i]->count);
             }
         }
     }
