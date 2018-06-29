@@ -21,6 +21,7 @@
  */
 
 #include "utils.h"
+#include "macros.h"
 
 #include <stdio.h>
 
@@ -28,7 +29,18 @@ void error(char *msg, char *file, size_t line) {
 
     char err_buf[512];
 
-    snprintf(err_buf, sizeof err_buf, "\nERR: %s. [%s:%zu]\n", msg, file, line);
+    snprintf(err_buf, sizeof err_buf, "%sERR: %s. [%s:%zu] %s\n",
+             ANSI_COLOR_RED,  msg, file, line, ANSI_COLOR_RESET);
 
     fprintf(stderr, err_buf);
+}
+
+void warn(char *msg, char *file, size_t line) {
+
+    char err_buf[512];
+
+    snprintf(err_buf, sizeof err_buf, "%sWARN: %s. [%s:%zu] %s\n",
+             ANSI_COLOR_YELLOW,  msg, file, line, ANSI_COLOR_RESET);
+
+    fprintf(stdout, err_buf);
 }

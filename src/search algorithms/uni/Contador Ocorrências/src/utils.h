@@ -29,7 +29,9 @@
  * @brief Prints a formatted error message to stderr.
  */
 void error(char *msg, char *file, size_t line);
-
+/**
+ * @brief Prints a formatted warning message to stdout.
+ */
 void warn(char *msg, char *file, size_t line);
 
 #endif // UTILS_H
