@@ -24,6 +24,8 @@ they have not been tested with large instances, you've been warned.
 - [ ] Double Linked List
 - [x] Binary Search Trees
 - [ ] AVL Trees
+- [ ] Hash tables
+- [ ] Trie
 
 ## Sort algorithms
 
