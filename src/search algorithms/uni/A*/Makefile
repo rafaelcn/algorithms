@@ -1,4 +1,4 @@
-CC=g++
+CC=clang++
 FLAGS=-Wall -O3 -pedantic -std=c++11
 DFLAGS=-Wall -Og -g -pedantic -std=c++11
 EXEC=a-star.out
