@@ -9,16 +9,20 @@ static Node north{0, 1};
 std::array<Node, 4> Graph::DIRS {east, south, west, north};
 
 bool Graph::in_bounds(Node node) const {
+
     bool x_bound = 0 <= node.x && node.x < width;
     bool y_bound = 0 <= node.y && node.y < height;
-    return x_bound && y_bound;
+
+    return x_bound && y_bound; //&& walls.find(node) == walls.end();
 }
 
 bool Graph::passable(Node node) const {
+
     return walls.find(node) == walls.end();
 }
 
 std::vector<Node> Graph::neighbors(Node node) const {
+
     std::vector<Node> results;
 
     for (Node dir : DIRS) {
@@ -36,6 +40,7 @@ std::vector<Node> Graph::neighbors(Node node) const {
 }
 
 double Graph::cost(Node from_node, Node to_node) const {
+
     double cost = 4;
 
     if (rocky.find(to_node) != rocky.end()) {
@@ -152,7 +157,7 @@ void breadth_first_search(Graph graph, Node start, Node goal,
     came_from[start] = start;
 
     while (!frontier.empty()) {
-        auto current = frontier.front();
+        Node current = frontier.front();
         frontier.pop();
 
         if (current == goal) {
@@ -160,12 +165,12 @@ void breadth_first_search(Graph graph, Node start, Node goal,
         }
 
         for (Node neighbor : graph.neighbors(current)) {
-            auto result = came_from.find(neighbor);
+            auto is_contained = came_from.find(neighbor);
 
-            if (result == came_from.end()) {
+              if (is_contained == came_from.end()) {
                 frontier.push(neighbor);
                 came_from[current] = neighbor;
-            }
+              }
         }
     }
 }
@@ -175,11 +180,22 @@ std::vector<Node> reconstruct_path(const Node start, const Node goal,
     std::vector<Node> path;
     Node current = goal;
 
-    while (current != start) {
-        path.push_back(current);
-        current = came_from[current];
+    // Verifies before hand if the goal node is contained in came_from
+    // in other words: does the algorithm found the goal?
+    auto is_contained = came_from.find(goal);
+
+    if (is_contained != came_from.end()) {
+        while (current != start) {
+            path.push_back(current);
+            current = came_from[current];
+        }
+
+        path.push_back(start);
+    } else {
+        path = std::vector<Node>();
     }
 
     std::reverse(path.begin(), path.end());
+
     return path;
 }
