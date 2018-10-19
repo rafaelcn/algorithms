@@ -2,6 +2,9 @@
 #include <vector>
 #include <map>
 
+// Change the following definition to 1 if you want to see colors.
+#define HAS_COLORS 0
+
 #include "graph.hpp"
 #include "draw.hpp"
 #include "utils.hpp"
@@ -12,7 +15,7 @@ void print_path_taken(std::vector<Node>,
 
 int main(int argc, char **argv) {
 
-    std::cout << "\n\nThis is a randomly generated map\n\n"
+    std::cout << "\nThis is a randomly generated map\n\n"
               << "LEGEND:\n"
               << ". -> Plain terrain\tcost:  1\n"
               << "R -> Rocky terrain\tcost: 10\n"
@@ -20,7 +23,7 @@ int main(int argc, char **argv) {
               << "S -> Sand terrain\tcost: 4\n"
               << "$ -> Reward terrain\tcost: 0\n"
               << "▓ -> Walls\n"
-              << "X -> Goal\n\n";
+              << red << "X -> Goal\n\n" << reset;
 
     // Creating and drawing the grid map
     Graph grid = create_graph();
@@ -79,10 +82,15 @@ int main(int argc, char **argv) {
             std::cout << "\nThe path taken by the algorithm\n\n";
 
             std::vector<Node> path = reconstruct_path(start, goal,
-                                                              came_from[0]);
-            draw_graph(grid, 4, nullptr, nullptr, nullptr, &path);
-
-            print_path_taken(path, cost_so_far[0]);
+                                                      came_from[0]);
+            if (path.size() == 0) {
+                std::cout << bold_red
+                          << "The path couldn't be found for the current goal."
+                          << reset << std::endl;
+            } else {
+                draw_graph(grid, 4, nullptr, nullptr, nullptr, &path);
+                print_path_taken(path, cost_so_far[0]);
+            }
             break;
         }
         case 2: {
@@ -91,9 +99,15 @@ int main(int argc, char **argv) {
 
             std::cout << "\nThe path taken by the algorithm\n\n";
 
-            std::vector<Node> path = reconstruct_path(start, goal,
-                                                              came_from[1]);
-            draw_graph(grid, 4, nullptr, nullptr, nullptr, &path);
+            std::vector<Node> path = reconstruct_path(start, goal, came_from[1]);
+
+            if (path.size() == 0) {
+                std::cout << bold_red
+                          << "The path couldn't be found for the current goal."
+                          << reset << std::endl;
+            } else {
+                draw_graph(grid, 4, nullptr, nullptr, nullptr, &path);
+            }
             break;
         }
         case 3:

@@ -23,7 +23,10 @@ void draw_graph(const Graph& graph, const int field_width, Node *const agent,
                     std::cout << "▓";
                 }
                 std::cout << std::setw(field_width);
-            } else if (point_to != nullptr && point_to->count(id)) {
+            }  else if (point_to != nullptr &&
+                        point_to->count(id) &&
+                        *agent != id) {
+
                 Node next = (*point_to)[id];
 
                 if (next.x == x + 1) {
@@ -39,7 +42,7 @@ void draw_graph(const Graph& graph, const int field_width, Node *const agent,
                 std::cout << (*distances)[id];
             } else if (path && find(path->begin(), path->end(), id) !=
                    path->end()) {
-                std::cout << std::setw(field_width+1) << "☺" << std::flush;
+                std::cout << std::setw(field_width) << "☺ " << std::flush;
             } else {
                 if (graph.mug.find(id) != graph.mug.end()) {
                     std::cout << "M" << std::flush;
