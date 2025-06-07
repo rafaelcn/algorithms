@@ -44,7 +44,7 @@ static void pferror(const char *m, const int line) {
 #ifdef __linux__
     fprintf(stderr, "%sError: %s | matrix.c on line %d%s\n", ANSI_COLOR_RED,
             m, line, ANSI_COLOR_RESET);
-#elif
+#else
     fprintf(stderr, "\nError: %s | matrix.c on line %d\n", m, line);
 #endif // __linux__
 }
@@ -56,7 +56,7 @@ static void pferror(const char *m, const int line) {
 static void pfinfo(const char *m) {
 #ifdef __linux__
     fprintf(stderr, "\n%sInfo: %s%s", ANSI_COLOR_GREEN, m, ANSI_COLOR_RESET);
-#elif
+#else
     fprintf(stderr, "\nInfo: %s", m);
 #endif // __linux__
 }
